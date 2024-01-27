@@ -1,0 +1,335 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html {
+    position: relative;
+    transition: 0.5s;
+}
+.welcome-main {
+    width: 100%;
+}
+
+.update {
+    display: none;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    z-index: 999;
+    background-color: white;
+}
+
+.btn-color {
+    background-color: #051922;
+    color: #fff;
+}
+
+.btn-color:hover {
+    color: #F28123;
+}
+
+.group-pass {
+    position: relative;
+}
+
+.btn-pass {
+    border: none;
+    background: rgba(0, 0, 0, 0);
+    padding: 4px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-pass span {
+    color: rgba(0, 0, 0, 0.5)
+}
+
+#showPassword {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.create-content,
+.update-content {
+    margin: auto 0;
+}
+
+.main-popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #f8f9fa59;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.addproduct_data-img input{
+    background-color: transparent;
+    border: none;
+}
+.addproduct_data-img input:focus{
+    border: none;
+}
+.addproduct_data-img label{
+    position: absolute;
+    background-color: #CA8696;
+    color: #f2f8f8;
+    padding: .5rem 1rem;
+    border-radius: 4px;
+    top: 2px;
+    left: 5px;
+    cursor: pointer;
+}
+.addproduct_data-img input{
+    padding-left: 60px;
+    padding-top: 10px
+}
+.addproduct_data{
+    position: relative;
+    font-weight: 600;
+}
+
+input[type="number"] {
+    width: 100% !important;
+}
+.gradient-custom {
+    /* fallback for old browsers */
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.save-card {
+    height: 300px;
+    overflow: auto;
+}
+
+.description-scroll {
+    height: 100px;
+    overflow: auto;
+}
+.description-scroll-detail {
+    height: 100px;
+    overflow: auto;
+}
+
+.detail-main {
+    position: relative;
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(0.36, 2.5, 0.55, 0.73);
+    animation-fill-mode: forwards;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(0, -10px, 0);
+    }
+    20%, 80% {
+        transform: translate3d(0, 10px, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(0, -10px, 0);
+    }
+    40%, 60% {
+        transform: translate3d(0, 10px, 0);
+    }
+}
+
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+}
+.gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+}
+
+.login {
+    display: flex;
+}
+
+.popupSignup{
+    height: 50%;
+    width: 40%;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.info__background{
+    background-image: url('/assets/img/latest-news/news-bg-1.jpg');
+    background-size: cover;
+    background-position: center;
+    padding-top: 4rem;
+    width: 100vw;
+    height:100vh;
+}
+.info__container {
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+    width: 90%;
+    max-width: 1024px;
+    max-height: 100vh;
+    box-shadow: 0 0 5px rgba(35, 31, 32, 0.8);
+    background: rgba(255,255,255,0.8);
+}
+
+.info__title {
+    color: var(--black--color);
+    margin-bottom: 1rem;
+}
+
+.info__data {
+    text-align: left;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.info__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info__data input {
+    width: 100%;
+    padding: .5rem;
+    border-bottom: 2px solid rgba(35, 31, 32, 0.5);
+    border-radius: 4px;
+    outline: none;
+    font-family: var(--title-font);
+    font-size: 16px;
+}
+
+.info__data input:focus {
+    border-bottom: 2px solid crimson;
+}
+
+.info__datap {
+    color: crimson;
+    margin-top: .25rem;
+    margin-left: .25rem;
+}
+
+.info__data-label {
+    font-size: 18px;
+    padding-bottom: .5rem;
+}
+
+.info__data-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.info__data-area label {
+    font-size: 16px;
+}
+
+.info__data-gender {
+    flex-direction: row;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.info__data-gender label {
+    padding: 0;
+}
+
+.info__data-area input[type=radio] {
+    margin-left: 2rem;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--black--color);
+}
+
+.ip-w-60 .info__data-area {
+    justify-content: flex-start;
+}
+
+.ip-w-60 input {
+    width: 50%;
+    margin-right: 1rem;
+}
+
+.section,
+footer {
+    z-index: 80;
+}
+
+.info__footer {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.info__back {
+    text-align: center;
+    width: 40%;
+    border-radius: 4px;
+    background-color: transparent;
+    padding: .75rem;
+    font-size: var(--h2-font-size);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.info__back a {
+    transition: 0.3s;
+    color: var(--gray-color);
+}
+
+.info__back a:hover {
+    color: var(--black-color);
+}
+button:focus {
+    outline: none;
+}
