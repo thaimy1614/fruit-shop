@@ -4,6 +4,7 @@
  */
 package controller;
 
+import model.Email;
 import model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,6 +57,28 @@ public class RegisterAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String username = request.getParameter("usersignup");
+        String name = request.getParameter("fullnamesignup");
+        String pass = request.getParameter("passwordsignup");
+        String email = request.getParameter("emailsignup");
+        String phone = request.getParameter("phonesignup");
+        String address = request.getParameter("addresssignup");
+        String verify = request.getParameter("verification");
+        String code = "group01";
+        Users u = new Users();
+        if(verify!=null){
+            if(verify.equals(code)){
+                boolean kq = false;
+                kq = u.createAcc(username, pass, name, email, phone, address);
+
+                if (kq) {
+                    request.setAttribute("mess", "login");
+                    request.getRequestDispatcher("signup.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("LoginPage.jsp").forward(request, response);
+                }
+            }
+        }
         request.getRequestDispatcher("signup.jsp").forward(request, response);
     }
 
@@ -80,14 +103,36 @@ public class RegisterAccount extends HttpServlet {
         boolean rs = u.checkUser(username);
         if (!rs) {
             boolean checkmail = u.checkMail(email);
-            if (!checkmail) {
-                boolean kq = u.createAcc(username, pass, name, email, phone, address);
-                if (kq) {
-                    request.setAttribute("mess", "login");
+            if (!checkmail){
+                String code = "group01";
+                String subject = "Verification";
+                String body = "<html><body>"
+                        + "<p>Dear " + name + " ,</p>"
+                        + "<p>Chúng tôi đã nhận được yêu cầu đăng ký tài khoản của bạn trên FruitShop. "
+                        + "<p>Vui lòng click vào đây để xác nhận tài khoản: "
+//                        + "<form action="+"signup"+" method="+"post"+"> "
+//                        + "<input type="+"hidden"+" name="+"usersignup"+" value="+username+" />"
+//                        + "<input type="+"hidden"+" name="+"fullnamesignup"+" value="+name+" />"
+//                        + "<input type="+"hidden"+" name="+"passwordsignup"+" value="+pass+" />"
+//                        + "<input type="+"hidden"+" name="+"emailsignup"+" value="+email+" />"
+//                        + "<input type="+"hidden"+" name="+"phonesignup"+" value="+phone+" />"
+//                        + "<input type="+"hidden"+" name="+"addresssignup"+" value="+address+" />"
+//                        + "<input type="+"hidden"+" name="+"verification"+" value="+"group01"+" hidden />"
+//                        + "<button type="+"submit"+" class="+"btn btn-primary w-100"+" ></button>"
+//                        + "</form>"
+                        + "<button class="+"btn btn-primary w-100"+" >"
+                        + "<a href='http://localhost:9996/FruitShop_war_exploded/signup?usersignup="+username+"&fullnamesignup="
+                        + name + "&passwordsignup=" + pass + "&emailsignup=" +email+ "&phonesignup=" + phone
+                        + "&addresssignup=" + address + "&verification=group01'>Verification Email</a>"
+                        + "</button>"
+                        + "</p>"
+                        + "<p>Trân trọng,<br>"
+                        + "Đội ngũ cửa hàng</p>"
+                        + "</body></html>";
+                Email.sendEmail(email, subject, body);
+                    request.setAttribute("mess", "An email was sent to you. Please check your email");
                     request.getRequestDispatcher("signup.jsp").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("LoginPage.jsp").forward(request, response);
-                }
+
             } else {
                 request.setAttribute("mess", "Mail đã tồn tại!");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);

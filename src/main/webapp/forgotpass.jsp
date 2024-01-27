@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : LoginPage
     Created on : Oct 15, 2023, 8:28:31 PM
     Author     : ADMIN
@@ -114,12 +114,12 @@
                 <div class="card-header h5 text-white bg-dark">Password Forget</div>
                 <div class="card-body px-5">
                     <p class="card-text py-2">
-                        Enter your user and we'll send you an email with string veritication.
+                        Enter your username and we'll send you an email with string verification.
                     </p>
                     <form action="forgotpass" method="get">
                         <div class="form-outline">
                             <label class="form-label" for="username">Username</label>
-                            <input type="text" name="userforgot" id="username" class="form-control my-3" />
+                            <input type="text" name="userforgot" id="username" class="form-control my-3" required/>
 
                         </div>
                         <button type="submit" id="resetPass" name="btnForgot" value="checkUser" class="btn btn-primary w-100">
@@ -147,7 +147,7 @@
                             <label class="form-label" for="code">Code</label>
                             <input type="text" name="codeforget" id="code" class="form-control my-3" required/>
                         </div>
-                        <button type="submit" id="resetPass" name="btnForgot" value="checkCode" class="btn btn-primary w-100">
+                        <button type="submit" id="resetPass1" name="btnForgot" value="checkCode" class="btn btn-primary w-100">
                             Send
                         </button>
                     </form>
@@ -160,7 +160,7 @@
         <script>
 
 
-
+            const validUsername = document.getElementById("validUsername");
             const passwordForm = document.getElementById("forgotpass");
             const password = document.getElementById("password");
             const repeatPassword = document.getElementById("repeatPassword");
