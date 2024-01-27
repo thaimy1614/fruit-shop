@@ -9,7 +9,6 @@ import model.CartDAO;
 import model.OrderDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,8 +17,6 @@ import java.util.List;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Email;
 import model.Users;
 
@@ -105,7 +102,7 @@ public class CheckoutController extends HttpServlet {
         HttpSession session = request.getSession();
         ZoneId gmt7Zone = ZoneId.of("Asia/Ho_Chi_Minh");
         ZonedDateTime gmt7DateTime = ZonedDateTime.now(gmt7Zone);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String date = gmt7DateTime.format(formatter);
         String user = (String) session.getAttribute("username");
         String name = request.getParameter("name");
@@ -117,7 +114,7 @@ public class CheckoutController extends HttpServlet {
         Users u = (Users) session.getAttribute("info");
         CartDAO daos = new CartDAO();
         List<Cart> pro = daos.getAllCart(user);
-        String mail = null;
+        String mail = "";
         float amounts = 0;
         mail += "<!DOCTYPE html>\n"
                 + "<html lang=\"en\">\n"
@@ -237,7 +234,7 @@ public class CheckoutController extends HttpServlet {
         boolean rs;
         int pay = Integer.parseInt(request.getParameter("pay"));
         rs = dao.addOrder(user, name, address, phone, quantity, amount, note, date, pay);
-
+        log(String.valueOf(rs));
         if (rs) {
             rs = false;
 
@@ -276,6 +273,8 @@ public class CheckoutController extends HttpServlet {
         }
 
     }
+
+
 
     /**
      * Returns a short description of the servlet.

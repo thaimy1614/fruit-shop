@@ -18,8 +18,8 @@ public class Email {
     // Email: tungletest1.email@gmail.com
     // Password: nebeekfipcstxcox
 
-    static final String from = "group1se1709@gmail.com";
-    static final String password = "dxcr khen euuj xdum";
+    static final String from = "group01se1709@gmail.com";
+    static final String password = "tmju sqbj woub htwb";
 
     public static boolean sendEmail(String to, String tieuDe, String noiDung) {
         // Properties : khai báo các thuộc tính
@@ -49,7 +49,7 @@ public class Email {
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
 
             // Người gửi
-            msg.setFrom("Fuitshop");
+            msg.setFrom("FruitShop");
 
             // Người nhận
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
