@@ -2,6 +2,7 @@ D:\2024\SWP\FruitShop\src\main\java\controller\ForgotPassword.java
 D:\2024\SWP\FruitShop\src\main\java\model\OrderDAO.java
 D:\2024\SWP\FruitShop\src\main\java\model\CartDAO.java
 D:\2024\SWP\FruitShop\src\main\java\controller\LoginController.java
+D:\2024\SWP\FruitShop\src\main\java\MainShop.java
 D:\2024\SWP\FruitShop\src\main\java\model\Cart.java
 D:\2024\SWP\FruitShop\src\main\java\com\vnpay\common\Config.java
 D:\2024\SWP\FruitShop\src\main\java\model\Order.java
@@ -22,6 +23,8 @@ D:\2024\SWP\FruitShop\src\main\java\controller\LogoutController.java
 D:\2024\SWP\FruitShop\src\main\java\connect\DBConnect.java
 D:\2024\SWP\FruitShop\src\main\java\model\Users.java
 D:\2024\SWP\FruitShop\src\main\java\controller\OrderPlaceController.java
+D:\2024\SWP\FruitShop\src\main\java\TestMain.java
 D:\2024\SWP\FruitShop\src\main\java\com\vnpay\common\vnpayQuery.java
+D:\2024\SWP\FruitShop\src\main\java\controller\MenuController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\ProductController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\AccountController.java

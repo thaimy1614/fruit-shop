@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.CartDAO;
 import model.Users;
 
 /**
@@ -93,8 +94,14 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("info", info);
                 session.setAttribute("user", info.getFullname());
                 session.setAttribute("username", userName);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("home");
-                requestDispatcher.forward(request, response);
+                session.setAttribute("isAdmin", info.getIsAdmin());
+                if (info.getIsAdmin() == 1) {
+                    request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                } else {
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("home");
+                    requestDispatcher.forward(request, response);
+                }
+
             } else {
                 request.setAttribute("mess", "Login failed, username or password is incorrect!");
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("LoginPage.jsp");

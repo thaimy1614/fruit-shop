@@ -68,7 +68,7 @@ public class CartController extends HttpServlet {
                             + "   </tr>");
 
                 }
-                
+
             }
         } else {
             List<Cart> pro = dao.getAllCart(user);
@@ -78,6 +78,7 @@ public class CartController extends HttpServlet {
             }
             request.setAttribute("amount", amount);
             request.setAttribute("pro", pro);
+
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
 

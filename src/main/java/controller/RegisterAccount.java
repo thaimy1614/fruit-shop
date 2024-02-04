@@ -121,7 +121,7 @@ public class RegisterAccount extends HttpServlet {
 //                        + "<button type="+"submit"+" class="+"btn btn-primary w-100"+" ></button>"
 //                        + "</form>"
                         + "<p>"
-                        + "<a href='http://localhost:9996/FruitShop_war_exploded/signup?usersignup="+username+"&fullnamesignup="
+                        + "<a href='http://localhost:9999/FruitShop/signup?usersignup="+username+"&fullnamesignup="
                         + name + "&passwordsignup=" + pass + "&emailsignup=" +email+ "&phonesignup=" + phone
                         + "&addresssignup=" + address + "&verification=group01' style='"
                         + "background-color:#3498db; color:#ffffff; text-decoration:none; padding:10px 20px;"

@@ -181,4 +181,38 @@ public class CartDAO {
         }
         return rerult;
     }
+    public int countItemsInCart(String username){
+        int count = 0;
+        String query = "select count(*) as recordCount from Cart where username = ?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, username);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt("recordCount");
+            }
+            return count;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        return count;
+    }
 }

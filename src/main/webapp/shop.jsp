@@ -1,3 +1,4 @@
+<%@page import="model.CartDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -34,7 +35,8 @@
         <link rel="stylesheet" href="assets/css/main.css">
         <!-- responsive -->
         <link rel="stylesheet" href="assets/css/responsive.css">
-        <script src="/js/script.js"></script>
+        <script src="js/script.js"></script>
+
     </head>
     <body>
 
@@ -51,7 +53,7 @@
             <!-- end header -->
 
             <!-- search area -->
-            
+
             <!-- end search arewa -->
 
             <!-- breadcrumb-section -->
@@ -254,7 +256,6 @@
             });
 
             function addCart(param) {
-
                 var proId = param.getAttribute('data-cart-id');
                 var user = param.getAttribute('data-cart-user');
                 var quantity = param.getAttribute('data-cart-quantity');
@@ -268,13 +269,28 @@
                     },
 
                     success: function (data) {
+                        if (data && typeof data.count !== 'undefined') {
+                            // Access the updated count from the JSON response
+                            var updatedCount = data.count;
 
+                            // Update the cart count on the page
+                            var numberOfItem = document.getElementById("lblCartCount");
+                            numberOfItem.innerHTML = updatedCount;
+                        } else {
+                            console.error("Invalid JSON response from server");
+                        }
+                    },
+
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error("AJAX Error:", textStatus, errorThrown);
+                        console.log("Response Text:", jqXHR.responseText);
                     }
                 });
+
             }
         </script>
         <!-- jquery -->
-        <script src="assets/js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
         <!-- bootstrap -->
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <!-- count down -->
