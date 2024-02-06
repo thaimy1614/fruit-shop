@@ -29,7 +29,7 @@
         <link rel="shortcut icon" href="assets/images/favicon.ico" />
         <script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
         <script src="./jQuery/popper.min.js"></script>
-        <script src="./bootstrap/bootstrap.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="./jQuery/jquery-3.6.0.min.js"></script>
         <script src="./js/script.js"></script>
         <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">

@@ -50,7 +50,7 @@
             <!-- end header -->
 
             <!-- search area -->
-            
+
             <!-- end search area -->
 
             <!-- hero area -->
@@ -143,7 +143,7 @@
                                         <c:param name="cate" value="${p.cname}"/>
                                         <c:param name="proId" value="${p.pId}"/>
                                     </c:url>
-                                     <a onclick="Delete(this)" data-order-link="${detail}"><img src="${p.pimg}" alt=""></a>
+                                    <a onclick="Delete(this)" data-order-link="${detail}"><img src="${p.pimg}" alt=""></a>
                                 </div>
                                 <h3>${p.pName}</h3>
                                 <p class="product-price"><span>Per Kg</span> ${p.pPrice}VND </p>
@@ -436,7 +436,17 @@
                     },
 
                     success: function (data) {
+                        if (data && typeof data.count !== 'undefined') {
+                            $('#lblCartCount').removeClass('hidden');
+                            // Access the updated count from the JSON response
+                            var updatedCount = data.count;
 
+                            // Update the cart count on the page
+                            var numberOfItem = document.getElementById("lblCartCount");
+                            numberOfItem.innerHTML = updatedCount;
+                        } else {
+                            console.error("Invalid JSON response from server");
+                        }
                     }
                 });
             }

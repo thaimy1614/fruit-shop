@@ -58,7 +58,7 @@
             <!-- end header -->
 
             <!-- search area -->
-            
+
             <!-- end search arewa -->
 
             <!-- breadcrumb-section -->
@@ -298,7 +298,11 @@
                     success: function (data) {
                         var row = document.getElementById("table-cart-item");
                         row.innerHTML = data;
-
+                        var numberOfItem = document.getElementById("lblCartCount");
+                        numberOfItem.innerHTML -= 1;
+                        if(numberOfItem.innerHTML === '0'){
+                            numberOfItem.classList.add("hidden");
+                        }
                     }
                 });
             }

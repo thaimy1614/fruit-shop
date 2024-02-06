@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="/css/style-welcome.css"/>
+        <link rel="stylesheet" href="css/style-welcome.css"/>
         <title>User Information</title>
         <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
         <!-- google font -->
@@ -36,95 +36,7 @@
             .top-header-area {
                 background-color: #051922;
             }
-            body {
-                font-family: 'Arial', sans-serif;
-                background-color: #f8f9fa;
-                margin: 0;
-            }
-
-            .info__background {
-                background-color: #ffffff;
-                color: #333333;
-                padding-top: 50px;
-                padding-bottom: 50px;
-            }
-
-            .info__container {
-                max-width: 800px;
-                margin: 0 auto;
-                text-align: center;
-            }
-
-            .info__title {
-                font-size: 36px;
-                margin-bottom: 30px;
-                color: #007bff;
-            }
-
-            .info__form {
-                display: grid;
-                gap: 20px;
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .info__data,
-            .info__footer {
-                display: grid;
-                gap: 10px;
-            }
-
-            .info__data-label {
-                font-weight: bold;
-                margin-bottom: 5px;
-                color: #495057;
-            }
-
-            .info__data input[type="text"] {
-                width: 100%;
-                padding: 12px;
-                border: 1px solid #ced4da;
-                border-radius: 4px;
-                box-sizing: border-box;
-                font-size: 16px;
-            }
-
-            .info__datap {
-                color: #dc3545;
-                margin-top: 5px;
-            }
-
-            .info__footer {
-                grid-column: span 2;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-top: 20px;
-            }
-
-            .info__form .info__data:nth-child(2) {
-                grid-column: span 2;
-            }
-
-            .info__form .info__data:nth-child(1) {
-                grid-column: span 2;
-            }
-
-            .info__back a {
-                text-decoration: none;
-                color: #007bff;
-                font-weight: bold;
-                font-size: 18px;
-            }
-
-            .login__submit {
-                background-color: #28a745;
-                color: #ffffff;
-                padding: 14px 20px;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 18px;
-            }
+            
         </style>
     </head>
     <body>
@@ -137,18 +49,18 @@
             <div class="info__background pt-150">
                 <div class="info__container">
                     <h1 class="info__title">Thông tin cá nhân</h1>
-                    <form action="account" method="post" class="info__form" id="update-form" >
-                        <div class="info__data ip-w-60">
+                    <form action="account" method="post" class="info__form" id="update-form" style="display: flex; flex-wrap: wrap;">
+                        <div class="info__data ip-w-60" style="flex: 0 0 100%;">
                             <label for="txtHoten" class="info__data-label">Họ tên</label>
                             <div class="info__data-area">
                                 <input type="text" name="fullname" id="txtHoten" value="${ sessionScope.info.fullname}" placeholder="Nhập họ tên">
                             <p class="info__datap" id="upterror"></p>
-                            <input type="hidden" name="username" value="${ sessionScope.info.user}">
+                            <input type="hidden"  name="username" value="${ sessionScope.info.user}">
                         </div>
                         <p class="info__datap" id="upnerror"></p>
                     </div>
                     <div class="info__data">
-                        <label for="Email" class="info__data-label">Email</label>
+                        <label for="email" class="info__data-label">Email</label>
                         <input type="text" name="mail" readonly id="email" value="${ sessionScope.info.mail}">
                     </div>           
                     <div class="info__data">
@@ -177,7 +89,7 @@
                 </form>
             </div>
         </div>
-        <script src="/js/script.js"></script>
+        <script src="js/script.js"></script>
     </script>
     <!-- jquery -->
     <script src="assets/js/jquery-1.11.3.min.js"></script>

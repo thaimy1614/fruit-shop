@@ -9,10 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Manager</title>
         <link rel="stylesheet" href="./css/style-welcome.css" />
-        <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
         <script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
         <script src="./jQuery/popper.min.js"></script>
-        <script src="./bootstrap/bootstrap.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
         <!-- google font -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">

@@ -125,7 +125,7 @@ public class CartController extends HttpServlet {
 
             out.println("<tr>\n"
                     + "                                             <td class=\"font-weight-bold\" colspan=\"4\">Total:</td>\n"
-                    + "                                             <td class=\"font-weight-bold\" colspan=\"2\">" + amount + "$</td>\n"
+                    + "                                             <td class=\"font-weight-bold\" colspan=\"2\">" + amount + "VND</td>\n"
                     + "                                        </tr>");
             for (Cart c : pro) {
                 out.println(" <tr class=\"table-body-row\">\n"

@@ -96,7 +96,7 @@ public class AddCart extends HttpServlet {
             try ( PrintWriter out = response.getWriter()) {
                 HttpSession session = request.getSession();
                 String username = (String) session.getAttribute("username");
-                int updatedCount = dao.countItemsInCart("thaine");
+                int updatedCount = dao.countItemsInCart(username);
 
                 JSONObject jsonResponse = new JSONObject();
                 jsonResponse.put("count", updatedCount);

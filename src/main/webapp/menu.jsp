@@ -3,6 +3,7 @@
     Created on : Nov 2, 2023, 12:54:01 AM
     Author     : ADMIN
 --%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 <%@page import="model.CartDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -41,16 +42,14 @@
                             session.setAttribute("user", info.getFullname());
                             session.setAttribute("username", user);
 
-                            
-
                         }
                     %>
 
                     <%
-                        String username = (String)session.getAttribute("username");
+                        String username = (String) session.getAttribute("username");
                         CartDAO cd = new CartDAO();
-                            int count = cd.countItemsInCart(username);
-                            session.setAttribute("count", count);
+                        int count = cd.countItemsInCart(username);
+                        session.setAttribute("count", count);
                     %>
                     <!-- menu start -->
                     <nav class="main-menu">
@@ -140,6 +139,14 @@
         </div>
     </div>
 </div>
+
+<script>
+                                    $(document).ready(function () {
+                                        if ($('#lblCartCount').text() === '0') {
+                                            $('#lblCartCount').addClass('hidden');
+                                        }
+                                    });
+</script>                          
 <script src="js/script.js"></script>
 <style>
     #lblCartCount {
@@ -160,5 +167,8 @@
 
     .badge-warning[href] {
         background-color: #c67605;
+    }
+    .hidden{
+        display: none;
     }
 </style>

@@ -13,6 +13,7 @@
 
         <!-- title -->
         <title>Shop</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
         <!-- favicon -->
         <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -36,7 +37,7 @@
         <!-- responsive -->
         <link rel="stylesheet" href="assets/css/responsive.css">
         <script src="js/script.js"></script>
-
+        
     </head>
     <body>
 
@@ -254,7 +255,7 @@
 
                 });
             });
-
+            
             function addCart(param) {
                 var proId = param.getAttribute('data-cart-id');
                 var user = param.getAttribute('data-cart-user');
@@ -270,6 +271,7 @@
 
                     success: function (data) {
                         if (data && typeof data.count !== 'undefined') {
+                            $('#lblCartCount').removeClass('hidden');
                             // Access the updated count from the JSON response
                             var updatedCount = data.count;
 
@@ -290,7 +292,6 @@
             }
         </script>
         <!-- jquery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
         <!-- bootstrap -->
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <!-- count down -->
