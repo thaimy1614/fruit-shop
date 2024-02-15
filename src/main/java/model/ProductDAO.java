@@ -8,6 +8,7 @@ import connect.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -284,6 +285,54 @@ public class ProductDAO {
         }
         return rerult;
 
+    }
+
+    public List<Product> getProductsByPage(int pageNumber, int pageSize, String filter) {
+        List<Product> result = new ArrayList<>();
+        String sql = "SELECT P.[pId], P.[name], P.[price], P.[img], P.[des], P.[quantity], C.[cName], P.cId\n"
+                + "                FROM [dbo].[Product] AS P\n"
+                + "               INNER JOIN Catelogy AS C ON P.[cId] = C.[cId]\n"
+                + "                where [status] = 1"
+                + "                 order by pId desc "
+                + "OFFSET ? ROWS\n"
+                + "FETCH NEXT ? ROWS ONLY;";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, pageNumber);
+            ps.setInt(2, pageSize);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getFloat(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getInt(8)));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        return result;
     }
 
 }

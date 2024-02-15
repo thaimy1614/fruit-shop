@@ -83,24 +83,9 @@
                 var $this = $(this).html(event.strftime('' + '<div class="counter-column"><div class="inner"><span class="count">%D</span>Days</div></div> ' + '<div class="counter-column"><div class="inner"><span class="count">%H</span>Hours</div></div>  ' + '<div class="counter-column"><div class="inner"><span class="count">%M</span>Mins</div></div>  ' + '<div class="counter-column"><div class="inner"><span class="count">%S</span>Secs</div></div>'));
             });
          });
-        }
-
-        // projects filters isotop
-        $(".product-filters li").on('click', function () {
-            
-            $(".product-filters li").removeClass("active");
-            $(this).addClass("active");
-
-            var selector = $(this).attr('data-filter');
-
-            $(".product-lists").isotope({
-                filter: selector,
-            });
-            
-        });
-        
-        // isotop inner
-        $(".product-lists").isotope();
+       }
+//        // isotop inner
+//        $(".product-lists").isotope();
 
         // magnific popup
         $('.popup-youtube').magnificPopup({

@@ -37,7 +37,16 @@
         <!-- responsive -->
         <link rel="stylesheet" href="assets/css/responsive.css">
         <script src="js/script.js"></script>
-        
+        <script>
+            // JavaScript để xác định trạng thái đăng nhập của người dùng
+            $(document).ready(function () {
+                // Kiểm tra xem người dùng đã đăng nhập hay chưa
+                var isLoggedIn = ${not empty sessionScope.user};
+                console.log('is logged: ' + isLoggedIn);
+                // Đặt giá trị của thuộc tính data-logged-in
+                $('#login-info').attr('data-logged-in', isLoggedIn.toString());
+            });
+        </script>
     </head>
     <body>
 
@@ -81,10 +90,10 @@
                             <div class="product-filters">
                                 <ul>
                                     <li class="active" data-filter="*">All</li>
-                                    <li data-filter=".strawberry">Strawberry</li>
-                                    <li data-filter=".berry">Berry</li>
-                                    <li data-filter=".lemon">Lemon</li>
-                                    <li data-filter=".orther">Orther</li>
+                                    <li>Strawberry</li>
+                                    <li>Berry</li>
+                                    <li>Lemon</li>
+                                    <li>Other</li>
                                 </ul>
                             </div>
                         </div>
@@ -92,7 +101,6 @@
 
                     <div class="row product-lists">
                     <c:forEach var="p" items="${products}">
-
                         <div class="col-lg-4 col-md-6 text-center ${fn:toLowerCase(p.cname)}">
                             <div class="single-product-item">
                                 <c:url var="detail" value="shop">
@@ -118,12 +126,6 @@
                                         <a class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                                     </button>
                                 </c:if>
-
-
-
-
-
-
                             </div>
                         </div>
                     </c:forEach>			
@@ -133,11 +135,20 @@
                     <div class="col-lg-12 text-center">
                         <div class="pagination-wrap">
                             <ul>
-                                <li><a href="#">Prev</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a class="active" href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">Next</a></li>
+                                <li><a id="prevPage">Prev</a></li>
+                                    <c:forEach begin="1" end="${allProducts.size()/6 + 1}" step="1" varStatus="number">
+                                    <li>
+                                        <c:if test="${number.index == 1}">
+                                            <a page="${number.index}" class="page-number active">${number.index}</a>
+                                        </c:if>
+                                        <c:if test="${number.index != 1}">
+                                            <a class="page-number"  page="${number.index}">${number.index}</a>
+                                        </c:if>    
+                                    </li>
+                                </c:forEach>
+
+
+                                <li><a id="nextPage">Next</a></li>
                             </ul>
                         </div>
                     </div>
@@ -242,6 +253,7 @@
                 </div>
             </div>
         </div>
+        <div id="login-info" data-logged-in="false" data-username="${sessionScope.username}"></div>
         <!-- end copyright -->
         <script>
             const buttons = document.querySelectorAll(".object");
@@ -255,7 +267,7 @@
 
                 });
             });
-            
+
             function addCart(param) {
                 var proId = param.getAttribute('data-cart-id');
                 var user = param.getAttribute('data-cart-user');
@@ -290,6 +302,136 @@
                 });
 
             }
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                var currentPage = 1;
+                var maxPage = 100;
+
+                // Hàm để tải sản phẩm bằng AJAX
+                function loadProducts() {
+                    var filter = $('.product-filters li.active').html().toString().toLowerCase();
+                    if (filter === 'other') {
+                        filter = 'orther';
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "shop",
+                        data: {
+                            filter: filter,
+                            page: currentPage
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                            // Xóa danh sách sản phẩm hiện tại
+                            $('.product-lists').empty();
+
+                            var totalFilteredProducts = response.totalFilteredProducts;
+                            console.log(totalFilteredProducts);
+                            var products = response.productsOnPage;
+                            // Hiển thị sản phẩm mới tải
+                            $.each(products, function (index, p) {
+                                var productItem = $('<div>').addClass('col-lg-4 col-md-6 text-center ' + p.cname.toLowerCase());
+                                var productInner = $('<div>').addClass('single-product-item');
+                                var productImage = $('<div>').addClass('product-image');
+                                var imageLink = $('<a>').attr('onclick', 'Delete(this)').attr('data-order-link', 'shop?name=' + encodeURIComponent(p.pName) + '&img=' + encodeURIComponent(p.pimg) + '&price=' + encodeURIComponent(p.pPrice) + '&des=' + encodeURIComponent(p.pDes) + '&cate=' + encodeURIComponent(p.cname) + '&proId=' + encodeURIComponent(p.pId));
+                                var image = $('<img>').attr('src', p.pimg).attr('alt', '');
+                                var productName = $('<h3>').text(p.pName);
+                                var productPrice = $('<p>').addClass('product-price').html('<span>Per Kg</span> ' + p.pPrice + 'VND');
+
+                                // Kiểm tra xem người dùng đã đăng nhập hay chưa
+                                var isLoggedIn = ($('#login-info').attr('data-logged-in') === "true");
+
+                                // Tạo nút Add to Cart tương ứng
+                                var addToCartButton;
+                                if (isLoggedIn) {
+                                    var username = $('#login-info').attr('data-username').toString();
+                                    addToCartButton = $('<button>').addClass('object d-inline border-0 bg-white').attr('data-cart-id', p.pId).attr('data-cart-user', username).attr('data-cart-quantity', '1').attr('onclick', 'addCart(this)');
+                                    var cartBtn = $('<a>').addClass('cart-btn').html('<i class="fas fa-shopping-cart"></i> Add to Cart');
+                                    addToCartButton.append(cartBtn);
+                                } else {
+                                    addToCartButton = $('<a>').addClass('cart-btn').attr('href', 'loginpage').html('<i class="fas fa-shopping-cart"></i> Add to Cart');
+                                }
+
+                                // Ghép các phần tử con vào nhau
+                                imageLink.append(image);
+                                productImage.append(imageLink);
+                                productInner.append(productImage);
+                                productInner.append(productName);
+                                productInner.append(productPrice);
+                                productInner.append(addToCartButton);
+                                productItem.append(productInner);
+
+                                // Thêm sản phẩm vào danh sách
+                                $('.product-lists').append(productItem);
+                            });
+                            var currentNumberOfPage = $('.pagination-wrap ul').children().length - 2;
+                            console.log(currentNumberOfPage);
+                            console.log(Math.ceil(totalFilteredProducts / 6));
+                            if (currentNumberOfPage !== Math.ceil(totalFilteredProducts / 6)) {
+                                $('.pagination-wrap li').remove();
+                                var page = "<li><a id='prevPage'>Prev</a></li>";
+
+                                for (var i = 1; i <= Math.ceil(totalFilteredProducts / 6); i++) {
+                                    page += "<li><a class='page-number' page='" + i + "'>" + i + "</a></li>";
+                                }
+                                page += "<li><a id='nextPage'>Next</a></li>";
+                                $('.pagination-wrap ul').append(page);
+                                $('.pagination-wrap li a.page-number').first().addClass('active');
+                                console.log("successful!");
+                            }
+                            maxPage = Math.ceil(totalFilteredProducts / 6);
+                        }
+                    });
+                }
+
+                // Sử dụng delegated event để gắn sự kiện click cho các thẻ a.page-number trong .pagination-wrap ul
+                $('.pagination-wrap ul').on('click', 'li a.page-number', function () {
+                    // Loại bỏ lớp 'active' khỏi tất cả các thẻ 'a'
+                    $('.pagination-wrap li a').removeClass('active');
+                    // Thêm lớp 'active' cho thẻ 'a' hiện tại
+                    $(this).addClass('active');
+                    // Lấy giá trị của thẻ 'a' được click
+                    currentPage = parseInt($(this).text(), 10);
+                    // Gọi lại hàm loadProducts() với trang được chọn
+                    loadProducts();
+                });
+
+                $(".product-filters li").on('click', function () {
+                    currentPage = 1;
+
+                    $(".product-filters li").removeClass("active");
+                    $(this).addClass("active");
+                    loadProducts();
+
+//                    $('.pagination-wrap li a.page-number').removeClass('active');
+//                    $('.pagination-wrap li a.page-number').first().addClass('active');
+                });
+                // Sự kiện khi nhấn Prev hoặc Next
+                $('.pagination-wrap ul').on('click', 'li a#prevPage, li a#nextPage', function () {
+
+                    // Loại bỏ lớp 'active' khỏi tất cả các thẻ 'a'
+                    $('.pagination-wrap li a').removeClass('active');
+                    // Thêm lớp 'active' cho thẻ 'a' hiện tại
+
+                    // Lấy giá trị của thẻ 'a' được click
+                    var id = $(this).attr('id');
+                    if (id === 'prevPage' && currentPage > 1) {
+                        currentPage = currentPage.valueOf() - 1;
+                    } else if (id === 'nextPage') {
+                        currentPage = currentPage.valueOf() + 1;
+                    }
+                    if (currentPage == 0 || currentPage == maxPage + 1) {
+                        currentPage = 1;
+                    }
+                    $('.pagination-wrap li a.page-number').eq(currentPage - 1).addClass('active');
+                    loadProducts();
+                });
+                // Tải sản phẩm cho trang đầu tiên khi trang được tải
+
+            });
+
         </script>
         <!-- jquery -->
         <!-- bootstrap -->

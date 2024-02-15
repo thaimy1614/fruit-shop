@@ -4,6 +4,8 @@
  */
 package controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.Product;
 import model.ProductDAO;
 import java.io.IOException;
@@ -11,6 +13,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,9 +64,68 @@ public class ProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
-        List<Product> product = dao.getAllProducts();
-        request.setAttribute("products", product);
-        request.getRequestDispatcher("shop.jsp").forward(request, response);
+        List<Product> allProducts = dao.getAllProducts();
+        String filter = request.getParameter("filter");
+
+        int pageNumber = 1;
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            pageNumber = Integer.parseInt(pageParam);
+        }
+        int pageSize = 6;
+        List<Product> productsOnPage;
+        if (filter == null) {
+            productsOnPage = paginate(allProducts, pageNumber, pageSize);
+            request.setAttribute("products", productsOnPage);
+            request.setAttribute("allProducts", allProducts);
+
+            request.getRequestDispatcher("shop.jsp").forward(request, response);// Gán filter thành chuỗi rỗng nếu không có tham số filter được gửi
+        } else {
+            List<Product> filteredProducts = null;
+            if (filter.equalsIgnoreCase("all")) {
+                productsOnPage = paginate(allProducts, pageNumber, pageSize);
+            } else {
+                filteredProducts = filterProductsByCategory(allProducts, filter);
+                productsOnPage = paginate(filteredProducts, pageNumber, pageSize);
+            }
+            // Tính tổng số sản phẩm thỏa mãn filter theo loại trái cây
+            int totalFilteredProducts = filter.equalsIgnoreCase("all") ? allProducts.size() : filteredProducts.size();
+            ObjectMapper mapper = new ObjectMapper();
+            // Tạo một đối tượng JSON để chứa thông tin về sản phẩm và tổng số sản phẩm thỏa mãn filter
+            ObjectNode jsonResponse = mapper.createObjectNode();
+            jsonResponse.put("productsOnPage", mapper.valueToTree(productsOnPage));
+            jsonResponse.put("totalFilteredProducts", totalFilteredProducts);
+
+            // Gửi đối tượng JSON về dưới dạng chuỗi
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResponse.toString());
+        }
+
+    }
+
+    // Hàm lọc sản phẩm dựa trên bộ lọc (loại sản phẩm)
+    private List<Product> filterProductsByCategory(List<Product> allProducts, String category) {
+        if (category.equals("all") || category.isEmpty()) {
+            return allProducts; // Nếu không có bộ lọc, trả về toàn bộ danh sách sản phẩm
+        }
+        List<Product> filteredProducts = new ArrayList<>();
+        for (Product product : allProducts) {
+            if (product.getCname().equalsIgnoreCase(category)) {
+                filteredProducts.add(product);
+            }
+        }
+        return filteredProducts;
+    }
+
+    // Hàm phân trang danh sách sản phẩm
+    private List<Product> paginate(List<Product> products, int pageNumber, int pageSize) {
+        int startIndex = (pageNumber - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, products.size());
+        if (startIndex >= endIndex) {
+            return Collections.emptyList();
+        }
+        return products.subList(startIndex, endIndex);
     }
 
     /**

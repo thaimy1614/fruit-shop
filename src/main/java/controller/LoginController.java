@@ -96,7 +96,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("username", userName);
                 session.setAttribute("isAdmin", info.getIsAdmin());
                 if (info.getIsAdmin() == 1) {
-                    request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+                    request.getRequestDispatcher("dashboard").forward(request, response);
                 } else {
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("home");
                     requestDispatcher.forward(request, response);

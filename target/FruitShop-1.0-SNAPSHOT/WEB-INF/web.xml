@@ -56,6 +56,10 @@
         <servlet-name>MenuController</servlet-name>
         <servlet-class>controller.MenuController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DashboardController</servlet-name>
+        <servlet-class>controller.DashboardController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
         <url-pattern>/cart</url-pattern>
@@ -99,6 +103,10 @@
     <servlet-mapping>
         <servlet-name>MenuController</servlet-name>
         <url-pattern>/menu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardController</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

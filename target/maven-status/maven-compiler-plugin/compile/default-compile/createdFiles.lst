@@ -2,7 +2,7 @@ model\ProductDAO.class
 controller\HomeController.class
 model\Cart.class
 model\Email.class
-TestMain.class
+controller\DashboardController.class
 controller\LoginController.class
 model\Email$1.class
 com\vnpay\common\vnpayRefund.class
@@ -29,3 +29,4 @@ com\vnpay\common\ajaxServlet.class
 controller\LogoutController.class
 controller\MenuController.class
 connect\DBConnect.class
+model\UserDAO.class
