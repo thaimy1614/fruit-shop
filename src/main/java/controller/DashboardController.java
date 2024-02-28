@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Order;
+import model.OrderDAO;
 import model.UserDAO;
 
 /**
@@ -38,7 +40,15 @@ public class DashboardController extends HttpServlet {
             request.getRequestDispatcher("home").forward(request, response);
 
         } else {
+            OrderDAO od = new OrderDAO();
+            int numberOfOrders = od.getAllOrder().size();
             int numberOfCustomers = ud.countItemsInCart();
+            int total = 0;
+            for (Order order : od.getAllOrder()) {
+                total+=(int)order.getAmount();
+            }
+            request.setAttribute("total", total);
+            request.setAttribute("numberOfOrders", numberOfOrders);
             request.setAttribute("numberOfCustomer", numberOfCustomers);
             request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 

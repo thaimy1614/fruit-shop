@@ -1,3 +1,8 @@
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
 <%@page import="com.vnpay.common.Config"%>
@@ -55,7 +60,7 @@
                     fields.put(fieldName, fieldValue);
                 }
             }
-
+            
             String vnp_SecureHash = request.getParameter("vnp_SecureHash");
             if (fields.containsKey("vnp_SecureHashType")) {
                 fields.remove("vnp_SecureHashType");
@@ -66,6 +71,8 @@
             String signValue = Config.hashAllFields(fields);
 
         %>
+
+
         <!--Begin display -->
         <div class="container">
             <div class="header clearfix">
@@ -78,7 +85,7 @@
                 </div>    
                 <div class="form-group">
                     <label >Số tiền:</label>
-                    <label><%=(Integer.parseInt(request.getParameter("vnp_Amount"))/100)%></label>
+                    <label><%=(Integer.parseInt(request.getParameter("vnp_Amount")) / 100)%></label>
                 </div>  
                 <div class="form-group">
                     <label >Mô tả giao dịch:</label>
@@ -107,12 +114,53 @@
                             if (signValue.equals(vnp_SecureHash)) {
                                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
                                     out.print("Thành công");
-                                    request.setAttribute("pay","1");
+                                    request.setAttribute("pay", "1");
+                                    Connection conn = null;
+                                    PreparedStatement stmt = null;
+                                    try {
+                                        // Chuỗi kết nối đến cơ sở dữ liệu
+                                        String connectionString = "jdbc:sqlserver://localhost:1433;databaseName=ShopTraiCay;user=sa;password=170903;encrypt=false";
+                                        conn = DriverManager.getConnection(connectionString);
+
+                                        // Chuẩn bị câu lệnh SQL INSERT
+                                        String sql = "INSERT INTO TransactionVnpay (code, username, order_id, bank_name, account_number, transaction_date, total_amount, order_info) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                                        stmt = conn.prepareStatement(sql);
+
+                                        // Đặt các tham số cho câu lệnh INSERT
+                                        stmt.setString(1, request.getParameter("vnp_TxnRef"));
+                                        stmt.setString(2, (String) session.getAttribute("username")); // Thay thế bằng tên người dùng thực sự
+                                        stmt.setInt(3, 100);
+                                        stmt.setString(4, request.getParameter("vnp_BankCode"));
+                                        stmt.setString(5, request.getParameter("123456789")); // Cần thay đổi tên tham số này thành tên thích hợp
+                                        stmt.setString(6, request.getParameter("vnp_PayDate"));
+                                        stmt.setFloat(7, (float)Integer.parseInt(request.getParameter("vnp_Amount")) / 100);
+                                        stmt.setString(8, request.getParameter("vnp_OrderInfo"));
+
+                                        // Thực thi câu lệnh INSERT
+                                        stmt.executeUpdate();
+
+                                        // Đóng kết nối
+                                        conn.close();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    } finally {
+                                        try {
+                                            if (stmt != null) {
+                                                stmt.close();
+                                            }
+                                            if (conn != null) {
+                                                conn.close();
+                                            }
+                                        } catch (SQLException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    
                                 } else {
                                     out.print("Không thành công");
-                                    request.setAttribute("pay","0");
+                                    request.setAttribute("pay", "0");
                                 }
-
+                                
                             } else {
                                 out.print("invalid signature");
                             }
