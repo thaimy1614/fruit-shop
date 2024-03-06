@@ -3,11 +3,14 @@ controller\HomeController.class
 model\Cart.class
 model\Email.class
 controller\DashboardController.class
+model\Message.class
 controller\LoginController.class
 model\Email$1.class
 com\vnpay\common\vnpayRefund.class
+dao\FeedbackDAO.class
 model\Users.class
 model\Product.class
+controller\FeedbackController.class
 controller\AccountController.class
 controller\CheckoutController.class
 controller\CartController.class

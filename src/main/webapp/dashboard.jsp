@@ -88,7 +88,7 @@
                             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                             <h4 class="font-weight-normal mb-3">Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                             </h4>
-                            <h2 class="mb-5">${total} VND</h2>
+                            <h2 class="mb-5">${sessionScope.total} VND</h2>
                             <h6 class="card-text">Increased by 60%</h6>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                             <h4 class="font-weight-normal mb-3">Orders <i
                                     class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                             </h4>
-                            <h2 class="mb-5">${numberOfOrders}</h2>
+                            <h2 class="mb-5">${sessionScope.numberOfOrders}</h2>
                             <h6 class="card-text">Decreased by 10%</h6>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                             <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
                             </h4>
-                            <h2 class="mb-5">${numberOfCustomer}</h2>
+                            <h2 class="mb-5">${sessionScope.numberOfCustomer}</h2>
                             <h6 class="card-text">Increased by 5%</h6>
                         </div>
                     </div>

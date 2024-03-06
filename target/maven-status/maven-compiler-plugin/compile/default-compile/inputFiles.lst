@@ -1,5 +1,6 @@
 D:\2024\SWP\FruitShop\src\main\java\controller\ForgotPassword.java
 D:\2024\SWP\FruitShop\src\main\java\model\OrderDAO.java
+D:\2024\SWP\FruitShop\src\main\java\dao\FeedbackDAO.java
 D:\2024\SWP\FruitShop\src\main\java\model\CartDAO.java
 D:\2024\SWP\FruitShop\src\main\java\controller\LoginController.java
 D:\2024\SWP\FruitShop\src\main\java\MainShop.java
@@ -18,6 +19,8 @@ D:\2024\SWP\FruitShop\src\main\java\model\UserDAO.java
 D:\2024\SWP\FruitShop\src\main\java\controller\HomeController.java
 D:\2024\SWP\FruitShop\src\main\java\model\OrderItem.java
 D:\2024\SWP\FruitShop\src\main\java\controller\CheckoutController.java
+D:\2024\SWP\FruitShop\src\main\java\model\Message.java
+D:\2024\SWP\FruitShop\src\main\java\controller\FeedbackController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\ManagementController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\CartController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\LogoutController.java

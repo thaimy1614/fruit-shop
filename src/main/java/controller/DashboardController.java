@@ -47,9 +47,9 @@ public class DashboardController extends HttpServlet {
             for (Order order : od.getAllOrder()) {
                 total+=(int)order.getAmount();
             }
-            request.setAttribute("total", total);
-            request.setAttribute("numberOfOrders", numberOfOrders);
-            request.setAttribute("numberOfCustomer", numberOfCustomers);
+            session.setAttribute("total", total);
+            session.setAttribute("numberOfOrders", numberOfOrders);
+            session.setAttribute("numberOfCustomer", numberOfCustomers);
             request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 
         }

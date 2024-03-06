@@ -121,7 +121,7 @@ public class ManagementController extends HttpServlet {
             int loai = Integer.parseInt(request.getParameter("loai"));
             int quan = Integer.parseInt(request.getParameter("quantityC"));
             String imgFolderPath = "assets" + File.separator + "img" + File.separator + "products";
-            String appPath = "D:" + File.separator + "GitHub" +File.separator + "Project_Group01" + File.separator + "Fruitshop" + File.separator + "web";
+            String appPath = "D:" + File.separator + "2024" + File.separator + "SWP" +File.separator + "FruitShop" + File.separator + "web";
             String uploadPath = appPath + File.separator + imgFolderPath;
 
             // Tạo thư mục upload nếu chưa tồn tại

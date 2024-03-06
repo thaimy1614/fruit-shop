@@ -57,10 +57,10 @@
                         Notification:
                     </div>
                     <div class="text-danger text-decoration-none col-7 message" id="message">${mess}</div>
-            </div>
+                </div>
 
 
-            <div class="row justify-content-between" style="margin: 20px 0;">
+                <div class="row justify-content-between" style="margin: 20px 0;">
                 <button class="showCreate btn btn-dark">Add new</button>
                 
                 <form action="manage" method="get">
