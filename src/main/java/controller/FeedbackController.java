@@ -1,5 +1,9 @@
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import config.LocalDateTimeAdapter;
 import dao.FeedbackDAO;
 import java.io.IOException;
 import java.sql.Date;
@@ -20,12 +24,36 @@ public class FeedbackController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String sortType = request.getParameter("sort"); // Get sorting type from request
+        FeedbackDAO feedbackDAO = new FeedbackDAO();
+        List<Message> feedbackList = null;
         HttpSession session = request.getSession();
+        boolean isAdmin = ((int)session.getAttribute("isAdmin") == 1) ? true : false;
+        // Get feedback list based on sorting type
+        if (sortType == null) {
+            feedbackList = feedbackDAO.getAllMessagesSortedByNewest();
+            request.setAttribute("listOfMessage", feedbackList);
+            request.getRequestDispatcher("feedback.jsp").forward(request, response);
+        } else {
+            if ("oldest".equals(sortType)) {
+                feedbackList = feedbackDAO.getAllMessagesSortedByOldest();
+            } else {
+                feedbackList = feedbackDAO.getAllMessagesSortedByNewest(); // Default: Newest
+            }
+            // Convert feedback list and isAdmin flag to JSON
+            Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .create();
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("isAdmin", isAdmin);
+            jsonResponse.add("feedbackList", gson.toJsonTree(feedbackList));
 
-        FeedbackDAO fd = new FeedbackDAO();
-        List<Message> allFeedbacks = fd.getAllMessage();
-        request.setAttribute("listOfMessage", allFeedbacks);
-        request.getRequestDispatcher("feedback.jsp").forward(request, response);
+            // Send JSON response
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(jsonResponse.toString());
+
+        }
 
     }
 

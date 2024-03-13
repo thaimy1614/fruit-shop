@@ -75,8 +75,7 @@
                                 <ul class="sub-menu">
                                     <c:if test="${sessionScope.info.isAdmin == 1}">
                                         <li><a href="manage">Fruit Management</a></li>
-                                        <li><a href="dashboard.jsp">Dashboard</a></li>
-                                        <li><a href="chat">Chat</a></li>
+                                        <li><a href="dashboard">Dashboard</a></li>
 
                                     </c:if>
                                     <li><a href="listorder">My Order</a></li>
@@ -90,7 +89,7 @@
                                     <li><a href="single-news.jsp">Single News</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.jsp">Contact</a></li>
+                            <li><a href="feedback">Feedback</a></li>
                             <li><a href="about.jsp">About</a></li>
                             <li>
 

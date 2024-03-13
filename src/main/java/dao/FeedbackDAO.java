@@ -6,9 +6,9 @@ package dao;
 
 import connect.DBConnect;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -24,6 +24,101 @@ public class FeedbackDAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+
+    public List<Message> getAllMessagesSortedByNewest() {
+        List<Message> result = new ArrayList<>();
+
+        try {
+            conn = DBConnect.getConnection();
+            String query = "SELECT * FROM Feedback ORDER BY date_message DESC";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                // Get the Timestamp values from the ResultSet
+                LocalDateTime dateMessage = rs.getTimestamp(5).toLocalDateTime();
+                LocalDateTime dateResponse = null;
+                if (rs.getTimestamp(6) != null) {
+                    dateResponse = rs.getTimestamp(6).toLocalDateTime();
+                }
+
+                result.add(new Message(rs.getInt(7),
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        dateMessage,
+                        dateResponse
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public List<Message> getAllMessagesSortedByOldest() {
+        List<Message> result = new ArrayList<>();
+
+        try {
+            conn = DBConnect.getConnection();
+            String query = "SELECT * FROM Feedback ORDER BY date_message ASC";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                // Get the Timestamp values from the ResultSet
+                LocalDateTime dateMessage = rs.getTimestamp(5).toLocalDateTime();
+                LocalDateTime dateResponse = null;
+                if (rs.getTimestamp(6) != null) {
+                    dateResponse = rs.getTimestamp(6).toLocalDateTime();
+                }
+
+                result.add(new Message(rs.getInt(7),
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        dateMessage,
+                        dateResponse
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        return result;
+    }
 
     public List<Message> getAllMessage() {
         List<Message> result = new ArrayList<>();
