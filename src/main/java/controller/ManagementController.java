@@ -4,6 +4,9 @@
  */
 package controller;
 
+import com.aspose.cells.Cell;
+import com.aspose.cells.Workbook;
+import com.aspose.cells.Worksheet;
 import model.Order;
 import model.OrderDAO;
 import model.Product;
@@ -16,7 +19,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -57,9 +64,9 @@ public class ManagementController extends HttpServlet {
                 String id = request.getParameter("deleteId");
                 ProductDAO dao = new ProductDAO();
                 if (dao.deleteProduct(id)) {
-                   response.sendRedirect("manage");
+                    response.sendRedirect("manage");
                 } else {
-                   response.sendRedirect("404.jsp");
+                    response.sendRedirect("404.jsp");
                 }
             }
         } else if (check != null) {
@@ -113,6 +120,46 @@ public class ManagementController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("export") != null) {
+            Workbook workbook = new Workbook();
+            Worksheet sheet = workbook.getWorksheets().get(0);
+
+            ProductDAO dao = new ProductDAO();
+            List<Product> productList = dao.getAllProducts();
+
+            try {
+                if (!productList.isEmpty()) {
+                    String[] columnNames = {"ID", "Name", "Price", "Image", "Description", "Quantity", "Category Name", "Category ID"};
+
+                    // Set column names in the first row
+                    for (int i = 0; i < columnNames.length; i++) {
+                        Cell cell = sheet.getCells().get(0, i);
+                        cell.setValue(columnNames[i]);
+                    }
+
+                    // Populate data rows
+                    for (int row = 1; row <= productList.size(); row++) {
+                        Product product = productList.get(row - 1); // Adjusting for 0-based indexing
+                        for (int col = 0; col < columnNames.length; col++) {
+                            String propertyName = getColumnPropertyName(columnNames[col]); // Assuming you have a method to get the property name from the column name
+                            Object value = getPropertyByName(product, propertyName); // Assuming you have a method to get property value by name
+                            Cell cell = sheet.getCells().get(row, col);
+                            cell.setValue(value != null ? value.toString() : ""); // Set cell value
+                        }
+                    }
+
+                    // Save the Excel file
+                    workbook.save("D:\\2024\\SWP\\FruitShop\\output.xlsx");
+                } else {
+                    System.out.println("No data retrieved from ProductDAO.getAllProducts()");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Logger.getLogger(ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
         if (request.getParameter("btnInsert") != null) { //them moi
             String tensanpham = request.getParameter("prodnameC");
             int giatien = Integer.parseInt(request.getParameter("propriceC"));
@@ -121,7 +168,7 @@ public class ManagementController extends HttpServlet {
             int loai = Integer.parseInt(request.getParameter("loai"));
             int quan = Integer.parseInt(request.getParameter("quantityC"));
             String imgFolderPath = "assets" + File.separator + "img" + File.separator + "products";
-            String appPath = "D:" + File.separator + "2024" + File.separator + "SWP" +File.separator + "FruitShop" + File.separator + "web";
+            String appPath = "D:" + File.separator + "2024" + File.separator + "SWP" + File.separator + "FruitShop" + File.separator + "web";
             String uploadPath = appPath + File.separator + imgFolderPath;
 
             // Tạo thư mục upload nếu chưa tồn tại
@@ -157,6 +204,7 @@ public class ManagementController extends HttpServlet {
                 response.sendRedirect("404.jsp");
             }
         }
+
         if (request.getParameter("btnEdit") != null) {
             //chinh sua
             int id = Integer.parseInt(request.getParameter("productId"));
@@ -169,7 +217,7 @@ public class ManagementController extends HttpServlet {
             int quan = Integer.parseInt(request.getParameter("quantity"));
 
             String imgFolderPath = "assets" + File.separator + "img" + File.separator + "products";
-            String appPath = "D:" + File.separator + "GitHub" +File.separator + "Project_Group01" + File.separator + "Fruitshop" + File.separator + "web";
+            String appPath = "D:" + File.separator + "GitHub" + File.separator + "Project_Group01" + File.separator + "Fruitshop" + File.separator + "web";
             String uploadPath = appPath + File.separator + imgFolderPath;
 
             // Tạo thư mục upload nếu chưa tồn tại
@@ -219,6 +267,59 @@ public class ManagementController extends HttpServlet {
         }
 
         return newFileName;
+    }
+
+    private String getColumnPropertyName(String columnName) {
+        // Implement logic to map column names to property names
+        // For example:
+        switch (columnName) {
+            case "ID":
+                return "pId";
+            case "Name":
+                return "pName";
+            case "Price":
+                return "pPrice";
+            case "Image":
+                return "pimg";
+            case "Description":
+                return "pDes";
+            case "Quantity":
+                return "quantity";
+            case "Category Name":
+                return "cname";
+            case "Category ID":
+                return "cId";
+            // Add more cases for other column names as needed
+            default:
+                throw new IllegalArgumentException("Unknown column name: " + columnName);
+        }
+    }
+
+    private Object getPropertyByName(Product product, String propertyName) {
+        // Implement logic to retrieve property value by name
+        // You may use reflection or direct getter methods based on your implementation
+        // For example (assuming direct getters):
+        switch (propertyName) {
+            case "pId":
+                return product.getpId();
+            case "pName":
+                return product.getpName();
+            case "pPrice":
+                return product.getpPrice();
+            case "pimg":
+                return product.getPimg();
+            case "pDes":
+                return product.getpDes();
+            case "quantity":
+                return product.getQuantity();
+            case "cname":
+                return product.getCname();
+            case "cId":
+                return product.getcId();
+            // Add more cases for other property names as needed
+            default:
+                throw new IllegalArgumentException("Unknown property name: " + propertyName);
+        }
     }
 
     /**

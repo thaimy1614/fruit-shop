@@ -13,6 +13,19 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <repositories>
+
+        <repository>
+
+            <id>AsposeJavaAPI</id>
+
+            <name>Aspose Java API</name>
+
+            <url>https://releases.aspose.com/java/repo/</url>
+
+        </repository>
+
+    </repositories>
     
     <dependencies>
         <dependency>
@@ -88,7 +101,11 @@
             <version>20231013</version>
             <type>jar</type>
         </dependency>
-
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>aspose-cells</artifactId>
+            <version>24.3</version>
+        </dependency>
     </dependencies>
 
     <build>

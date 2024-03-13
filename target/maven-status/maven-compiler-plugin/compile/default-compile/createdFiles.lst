@@ -4,6 +4,7 @@ model\Cart.class
 model\Email.class
 controller\DashboardController.class
 model\Message.class
+config\LocalDateTimeAdapter.class
 controller\LoginController.class
 model\Email$1.class
 com\vnpay\common\vnpayRefund.class
