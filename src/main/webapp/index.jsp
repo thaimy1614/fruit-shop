@@ -63,8 +63,12 @@
                                     <p class="subtitle">Fresh & Organic</p>
                                     <h1>Delicious Seasonal Fruits</h1>
                                     <div class="hero-btns">
-                                        <a href="shop.jsp" class="boxed-btn">Fruit Collection</a>
-                                        <a href="contact.jsp" class="bordered-btn">Contact Us</a>
+                                        <form action="shop" method="POST">
+                                           <button style="background: none; border: none; color: white;"><a class="boxed-btn">Fruit Collection</a></button>
+                                            <a href="feedback" class="bordered-btn">Feedback</a>
+                                        </form>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +90,7 @@
                                 </div>
                                 <div class="content">
                                     <h3>Free Shipping</h3>
-                                    <p>When order over $75</p>
+                                    <p>When order over 200.000VND</p>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +129,7 @@
                         <div class="col-lg-8 offset-lg-2 text-center">
                             <div class="section-title">	
                                 <h3><span class="orange-text">New</span> Products</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+
                             </div>
                         </div>
                     </div>
@@ -164,87 +168,6 @@
         </div>
         <!-- end product section -->
 
-
-
-        <!-- testimonail-section -->
-        <div class="testimonail-section mt-150 mb-150">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 offset-lg-1 text-center">
-                        <div class="testimonial-sliders">
-                            <div class="single-testimonial-slider">
-                                <div class="client-avater">
-                                    <img src="assets/img/avaters/avatar1.png" alt="">
-                                </div>
-                                <div class="client-meta">
-                                    <h3>Saira Hakim <span>Local shop owner</span></h3>
-                                    <p class="testimonial-body">
-                                        " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                                    </p>
-                                    <div class="last-icon">
-                                        <i class="fas fa-quote-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-testimonial-slider">
-                                <div class="client-avater">
-                                    <img src="assets/img/avaters/avatar2.png" alt="">
-                                </div>
-                                <div class="client-meta">
-                                    <h3>David Niph <span>Local shop owner</span></h3>
-                                    <p class="testimonial-body">
-                                        " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                                    </p>
-                                    <div class="last-icon">
-                                        <i class="fas fa-quote-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-testimonial-slider">
-                                <div class="client-avater">
-                                    <img src="assets/img/avaters/avatar3.png" alt="">
-                                </div>
-                                <div class="client-meta">
-                                    <h3>Jacob Sikim <span>Local shop owner</span></h3>
-                                    <p class="testimonial-body">
-                                        " Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                                    </p>
-                                    <div class="last-icon">
-                                        <i class="fas fa-quote-right"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end testimonail-section -->
-
-        <!-- advertisement section -->
-        <div class="abt-section mb-150">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="abt-bg">
-                            <a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="abt-text">
-                            <p class="top-sub">Since Year 1999</p>
-                            <h2>We are <span class="orange-text">Fruitkha</span></h2>
-                            <p>Etiam vulputate ut augue vel sodales. In sollicitudin neque et massa porttitor vestibulum ac vel nisi. Vestibulum placerat eget dolor sit amet posuere. In ut dolor aliquet, aliquet sapien sed, interdum velit. Nam eu molestie lorem.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente facilis illo repellat veritatis minus, et labore minima mollitia qui ducimus.</p>
-                            <a href="about.jsp" class="boxed-btn mt-4">know more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end advertisement section -->
-
-
         <!-- latest news -->
         <div class="latest-news pt-150 pb-150">
             <div class="container">
@@ -253,7 +176,7 @@
                     <div class="col-lg-8 offset-lg-2 text-center">
                         <div class="section-title">	
                             <h3><span class="orange-text">Our</span> News</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+
                         </div>
                     </div>
                 </div>
@@ -346,16 +269,16 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-box about-widget">
                             <h2 class="widget-title">About us</h2>
-                            <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                            <p>Fruit Shop</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-box get-in-touch">
                             <h2 class="widget-title">Get in Touch</h2>
                             <ul>
-                                <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                                <li>support@fruitkha.com</li>
-                                <li>+00 111 222 3333</li>
+                                <li>126 NVC, An Khanh, Ninh Kieu, Can Tho</li>
+                                <li>group01se1709@gmail.com</li>
+                                <li>+84 123 456 789</li>
                             </ul>
                         </div>
                     </div>
@@ -367,7 +290,7 @@
                                 <li><a href="about.jsp">About</a></li>
                                 <li><a href="services.jsp">Shop</a></li>
                                 <li><a href="news.jsp">News</a></li>
-                                <li><a href="contact.jsp">Contact</a></li>
+                                <li><a href="feedback">Contact</a></li>
                             </ul>
                         </div>
                     </div>
