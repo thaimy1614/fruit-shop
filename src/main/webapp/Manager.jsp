@@ -71,7 +71,7 @@
                     <button class="btn btn-dark">Show All</button>
                 </form>
                 <form action="manage" method="POST">
-                    <input type="hidden" name="export" value="toExcel">
+                    <input type="hidden" name="export" value="products">
                     <button class="btn btn-dark">Export to Excel</button>
                 </form>
                 <form action="search" method="POST" class="row justify-content-center col-6">

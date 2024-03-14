@@ -57,8 +57,12 @@
 
                 <a class="d-flex align-content-center text-dark mb-3" href="manage"><span class="material-symbols-outlined">
                         arrow_back
-                    </span> Product management</a>
-
+                    </span>  Product management           <form action="manage" method="POST">
+                        <input type="hidden" name="export" value="orders" />
+                        <button class="btn btn-dark">Export to Excel</button>
+                    </form>
+                </a>
+                <span style="color: green;">${mess}</span>
                 <table class="table table-head-row table-striped">
                     <thead>
                         <tr class="bg-dark text-white">
