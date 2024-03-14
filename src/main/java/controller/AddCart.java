@@ -4,7 +4,7 @@
  */
 package controller;
 
-import model.CartDAO;
+import dao.CartDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import jakarta.servlet.ServletException;

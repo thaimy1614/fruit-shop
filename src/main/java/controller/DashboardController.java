@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Order;
-import model.OrderDAO;
-import model.UserDAO;
+import dao.OrderDAO;
+import dao.UserDAO;
 
 /**
  *

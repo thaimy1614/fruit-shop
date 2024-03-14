@@ -4,7 +4,7 @@
     Author     : ADMIN
 --%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
-<%@page import="model.CartDAO"%>
+<%@page import="dao.CartDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="jakarta.servlet.http.HttpSession" %>
@@ -79,6 +79,7 @@
 
                                     </c:if>
                                     <li><a href="listorder">My Order</a></li>
+                                    <li><a href="change-password">Change password</a></li>
                                     <li><a href="logout">Logout</a></li>
                                 </ul>
                                 <%  }

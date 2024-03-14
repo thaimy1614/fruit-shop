@@ -5,7 +5,7 @@
 package controller;
 
 import model.Order;
-import model.OrderDAO;
+import dao.OrderDAO;
 import model.OrderItem;
 import java.io.IOException;
 import jakarta.servlet.ServletException;

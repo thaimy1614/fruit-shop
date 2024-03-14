@@ -5,7 +5,7 @@
 package controller;
 
 import model.Cart;
-import model.CartDAO;
+import dao.CartDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

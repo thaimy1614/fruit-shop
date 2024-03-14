@@ -5,8 +5,8 @@
 package controller;
 
 import model.Cart;
-import model.CartDAO;
-import model.OrderDAO;
+import dao.CartDAO;
+import dao.OrderDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

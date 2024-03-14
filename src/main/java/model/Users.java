@@ -107,7 +107,7 @@ public class Users {
         this.isCus = isCus;
     }
 
-    private String md5(String passwordToHash) {
+    public String md5(String passwordToHash) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(passwordToHash.getBytes());
