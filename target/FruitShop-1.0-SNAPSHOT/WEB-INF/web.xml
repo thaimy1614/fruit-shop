@@ -72,6 +72,10 @@
         <servlet-name>TopFruitController</servlet-name>
         <servlet-class>controller.TopFruitController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoryController</servlet-name>
+        <servlet-class>controller.CategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
         <url-pattern>/cart</url-pattern>
@@ -131,6 +135,10 @@
     <servlet-mapping>
         <servlet-name>TopFruitController</servlet-name>
         <url-pattern>/topfruits</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryController</servlet-name>
+        <url-pattern>/category</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
