@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,9 @@
 
 </head>
 <body>
-	
+	<c:if test="${sessionScope.isAdmin eq 1}">
+            <c:redirect url="dashboard"></c:redirect>
+        </c:if>
 	<!--PreLoader-->
     <div class="loader">
         <div class="loader-inner">

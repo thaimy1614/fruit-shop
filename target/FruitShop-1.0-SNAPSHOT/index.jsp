@@ -44,7 +44,9 @@
             </div>
         </div>
         <!--PreLoader Ends-->
-
+        <c:if test="${sessionScope.isAdmin eq 1}">
+            <c:redirect url="dashboard"></c:redirect>
+        </c:if>
         <!-- header -->
         <jsp:include page="menu.jsp"></jsp:include>
             <!-- end header -->

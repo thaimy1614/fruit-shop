@@ -7,6 +7,7 @@ package controller;
 import com.aspose.cells.Cell;
 import com.aspose.cells.Workbook;
 import com.aspose.cells.Worksheet;
+import dao.CategoryDAO;
 import model.Order;
 import dao.OrderDAO;
 import model.Product;
@@ -24,6 +25,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Category;
 import org.apache.commons.io.FilenameUtils;
 
 /**
@@ -161,8 +163,42 @@ public class ManagementController extends HttpServlet {
                     ex.printStackTrace();
                     Logger.getLogger(ManagementController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-            else if(request.getParameter("export").equals("orders")){
+            } else if (request.getParameter("export").equals("categories")) {
+                CategoryDAO categoryDAO = new CategoryDAO();
+                List<Category> categoryList = categoryDAO.getAllCategories();
+
+                try {
+                    if (!categoryList.isEmpty()) {
+                        String[] columnNames = {"ID", "Name"};
+
+                        // Set column names in the first row
+                        for (int i = 0; i < columnNames.length; i++) {
+                            Cell cell = sheet.getCells().get(0, i);
+                            cell.setValue(columnNames[i]);
+                        }
+
+                        // Populate data rows
+                        for (int row = 1; row <= categoryList.size(); row++) {
+                            Category category = categoryList.get(row - 1); // Adjusting for 0-based indexing
+                            for (int col = 0; col < columnNames.length; col++) {
+                                String propertyName = getColumnPropertyNameOfCategory(columnNames[col]); // Assuming you have a method to get the property name from the column name
+                                Object value = getPropertyByNameOfCategory(category, propertyName); // Assuming you have a method to get property value by name
+                                Cell cell = sheet.getCells().get(row, col);
+                                cell.setValue(value != null ? value.toString() : ""); // Set cell value
+                            }
+                        }
+
+                        // Save the Excel file
+                        workbook.save("D:\\2024\\SWP\\FruitShop\\categories.xlsx");
+                        response.sendRedirect("category");
+                    } else {
+                        System.out.println("No data retrieved from ProductDAO.getAllProducts()");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(ManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (request.getParameter("export").equals("orders")) {
                 OrderDAO orderDAO = new OrderDAO();
                 List<Order> orderList = orderDAO.getAllOrder();
 
@@ -170,7 +206,7 @@ public class ManagementController extends HttpServlet {
                     if (!orderList.isEmpty()) {
                         String username;
 
-                            String[] columnNames = {"Username", "Order ID","Name", "Address", "Phone", "Quantity", "Amount", "Date", "Status", "Note", "Payment Method"};
+                        String[] columnNames = {"Username", "Order ID", "Name", "Address", "Phone", "Quantity", "Amount", "Date", "Status", "Note", "Payment Method"};
 
                         // Set column names in the first row
                         for (int i = 0; i < columnNames.length; i++) {
@@ -363,7 +399,7 @@ public class ManagementController extends HttpServlet {
                 throw new IllegalArgumentException("Unknown property name: " + propertyName);
         }
     }
-    
+
     private String getColumnPropertyNameOfOrder(String columnName) {
         switch (columnName) {
             case "Username":
@@ -413,18 +449,41 @@ public class ManagementController extends HttpServlet {
             case "date":
                 return order.getDate();
             case "status":
-                if(order.getStatus()==0){
+                if (order.getStatus() == 0) {
                     return "Canceled";
-                }else if(order.getStatus()==1){
+                } else if (order.getStatus() == 1) {
                     return "Not confirmed yet";
-                }else{
+                } else {
                     return "Confirmed";
                 }
             case "note":
                 return order.getNote();
             case "pay":
-                return (order.getPay()==1)?"VnPay":"COD";
+                return (order.getPay() == 1) ? "VnPay" : "COD";
             // Add more cases for other property names as needed
+            default:
+                throw new IllegalArgumentException("Unknown property name: " + propertyName);
+        }
+    }
+
+    private String getColumnPropertyNameOfCategory(String columnName) {
+        switch (columnName) {
+            case "ID":
+                return "cId";
+            case "Name":
+                return "cName";
+            default:
+                throw new IllegalArgumentException("Unknown column name: " + columnName);
+        }
+    }
+
+    private Object getPropertyByNameOfCategory(Category category, String propertyName) {
+        switch (propertyName) {
+            case "cId":
+                return category.getcId();
+            case "cName":
+                return category.getcName();
+
             default:
                 throw new IllegalArgumentException("Unknown property name: " + propertyName);
         }
@@ -439,7 +498,5 @@ public class ManagementController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

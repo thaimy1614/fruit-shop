@@ -36,13 +36,15 @@
         <link rel="stylesheet" href="css/style-welcome.css"/>
         <style>
             button:focus {
-                 outline: none; 
+                outline: none;
             }
         </style>
 
     </head>
     <body>
-
+        <c:if test="${sessionScope.isAdmin eq 1}">
+            <c:redirect url="dashboard"></c:redirect>
+        </c:if>
         <!--PreLoader-->
         <div class="loader">
             <div class="loader-inner">
@@ -55,7 +57,7 @@
             <!-- end header -->
 
             <!-- search area -->
-            
+
             <!-- end search arewa -->
 
             <!-- breadcrumb-section -->
@@ -79,30 +81,30 @@
                     <div class="row">
                         <div class="col-md-5">
                             <div class="single-product-img">
-                                <img src="<%= request.getParameter("img") %>" alt="">
+                                <img src="<%= request.getParameter("img")%>" alt="">
                         </div>
                     </div>
                     <div class="col-md-7">
                         <div class="single-product-content">
-                            <h3><%= request.getParameter("name") %></h3>
-                            <p class="single-product-pricing"><span>Per Kg</span> <%= request.getParameter("price") %>VND</p>
-                            <p><%= request.getParameter("des") %></p>
+                            <h3><%= request.getParameter("name")%></h3>
+                            <p class="single-product-pricing"><span>Per Kg</span> <%= request.getParameter("price")%>VND</p>
+                            <p><%= request.getParameter("des")%></p>
                             <div class="single-product-form">
                                 <form id="formAddcart" action="addcart" method="get">
                                     <input id="quantitycart" oninput="updateDataAttribute(this)" name="quan" type="number" value="1" min="1">
-                                    <input name="prId" type="hidden" value="<%= request.getParameter("proId") %>" >
+                                    <input name="prId" type="hidden" value="<%= request.getParameter("proId")%>" >
                                     <input name="username" type="hidden" value="${sessionScope.username}">
-                                    <input name="name" type="hidden" value="<%= request.getParameter("name") %>">
-                                    <input name="img" type="hidden" value="<%= request.getParameter("img") %>">
-                                    <input name="price" type="hidden" value="<%= request.getParameter("price") %>">
-                                    <input name="des" type="hidden" value="<%= request.getParameter("des") %>">
-                                    <input name="cate" type="hidden" value="<%= request.getParameter("cate") %>">
+                                    <input name="name" type="hidden" value="<%= request.getParameter("name")%>">
+                                    <input name="img" type="hidden" value="<%= request.getParameter("img")%>">
+                                    <input name="price" type="hidden" value="<%= request.getParameter("price")%>">
+                                    <input name="des" type="hidden" value="<%= request.getParameter("des")%>">
+                                    <input name="cate" type="hidden" value="<%= request.getParameter("cate")%>">
                                 </form>
-                                <button type="submit" id="myButton" class="object d-inline border-0 bg-white" data-cart-id="<%= request.getParameter("proId") %>" data-cart-user="${sessionScope.username}" 
+                                <button type="submit" id="myButton" class="object d-inline border-0 bg-white" data-cart-id="<%= request.getParameter("proId")%>" data-cart-user="${sessionScope.username}" 
                                         data-cart-quantity="1" onclick="addCart(this)">
                                     <a class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                                 </button>
-                                <p><strong>Categories: </strong><%= request.getParameter("cate") %></p>
+                                <p><strong>Categories: </strong><%= request.getParameter("cate")%></p>
                             </div>
                             <h4>Share:</h4>
                             <ul class="product-share">

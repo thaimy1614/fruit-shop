@@ -1,5 +1,9 @@
+controller\TopFruitController.class
 controller\HomeController.class
+dao\OrderDAO.class
 model\Cart.class
+dao\CartDAO.class
+dao\CategoryDAO.class
 model\Email.class
 controller\DashboardController.class
 model\Message.class
@@ -9,10 +13,13 @@ model\Email$1.class
 com\vnpay\common\vnpayRefund.class
 dao\FeedbackDAO.class
 model\Users.class
+controller\CategoryController.class
 model\Product.class
 controller\FeedbackController.class
+dao\UserDAO.class
 controller\AccountController.class
 controller\CheckoutController.class
+controller\ChangePasswordController.class
 controller\CartController.class
 MainShop.class
 controller\ManagementController.class
@@ -26,7 +33,9 @@ com\vnpay\common\vnpayQuery.class
 model\OrderItem.class
 controller\RegisterAccount.class
 controller\SearchController.class
+model\Category.class
 com\vnpay\common\ajaxServlet.class
 controller\LogoutController.class
 controller\MenuController.class
+dao\ProductDAO.class
 connect\DBConnect.class

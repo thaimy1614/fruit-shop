@@ -124,6 +124,18 @@ function transmisson3() {
     });
 }
 
+function transmisson4() {
+    $(document).ready(function () {
+        $(".update-button").click(function () {
+
+            var cId = $(this).data("order-id");
+            var username = $(this).data("username");
+            $("#cId").val(cId);
+            $("#username").val(username);
+            console.log(cId + username);
+        });
+    });
+}
 
 function transmisson() {
     $(document).ready(function () {
@@ -135,7 +147,7 @@ function transmisson() {
             var username = $(this).data("username");
             var orderTotal = $(this).data("order-total");
             var orderDes = $(this).data("order-des");
-
+            
             $("#orderID").val(orderId);
             $("#username").val(username);
             $("#orderTotal").val(orderTotal);
@@ -145,7 +157,7 @@ function transmisson() {
             document.getElementById('quantityU').value = orderQuan;
             $("#quantityU").val(orderQuan);
             $("#orderDescription").val(orderDes);
-
+            
         });
     });
 }
@@ -192,6 +204,7 @@ function transferData(sourceButton) {
 
 function Delete(sourceButton) {
     var deleteS = sourceButton.getAttribute("data-order-link");
+    console.log(deleteS);
     window.location.href = deleteS;
 }
 function sendLink() {

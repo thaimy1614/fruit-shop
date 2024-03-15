@@ -48,6 +48,9 @@
         </style>
     </head>
     <body>
+        <c:if test="${sessionScope.isAdmin eq 1}">
+            <c:redirect url="dashboard"></c:redirect>
+        </c:if>
         <c:if test="${sessionScope.info.user != null}">
             <jsp:forward page="home"></jsp:forward>
         </c:if>

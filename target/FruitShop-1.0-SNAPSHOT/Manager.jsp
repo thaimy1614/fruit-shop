@@ -293,7 +293,7 @@
                             <option value="1">Strawberry</option>
                             <option value="2">Berry</option>
                             <option value="3">Lemon</option>
-                            <option value="4">Orther</option>
+                            <option value="4">Other</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-success" name="btnInsert"

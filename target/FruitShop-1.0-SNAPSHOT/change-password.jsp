@@ -45,6 +45,9 @@
     </style>
 </head>
 <body>
+    <c:if test="${sessionScope.isAdmin eq 1}">
+        <c:redirect url="dashboard"></c:redirect>
+    </c:if>
     <c:if test="${sessionScope.info == null}">
         <jsp:forward page="home"></jsp:forward>
     </c:if>
@@ -55,7 +58,7 @@
                     <h3 class="text-center">Change Password</h3>
                     <form id="changepass" action="change-password" method="POST">
                         <span class="text-success text-center text-decoration-none">${messSuc}</span>
-                        <span class="text-danger text-center text-decoration-none">${messFail}</span>
+                    <span class="text-danger text-center text-decoration-none">${messFail}</span>
                     <div class="mb-3">
                         <label for="password" class="form-label">Current Password</label>
                         <input type="text" value="" class="form-control" id="password" name="pass" placeholder="Enter your current password">
@@ -110,7 +113,7 @@
                 if (newpass !== confirm) {
                     $("#error-confirm").text("New password does not match. Please re-enter!");
                     event.preventDefault();
-                } else if(newpass === confirm && confirm !== ""){
+                } else if (newpass === confirm && confirm !== "") {
                     $("#error-confirm").text("");
                 }
             });

@@ -40,6 +40,9 @@
         </style>
     </head>
     <body>
+        <c:if test="${sessionScope.isAdmin eq 1}">
+            <c:redirect url="dashboard"></c:redirect>
+        </c:if>
         <jsp:include page="menu.jsp"></jsp:include>
             <div class="loader">
                 <div class="loader-inner">
@@ -48,12 +51,12 @@
             </div>
             <div class="info__background pt-150">
                 <div class="info__container">
-                    <h1 class="info__title">Thông tin cá nhân</h1>
+                    <h1 class="info__title">Personal Information</h1>
                     <form action="account" method="post" class="info__form" id="update-form" style="display: flex; flex-wrap: wrap;">
                         <div class="info__data ip-w-60" style="flex: 0 0 100%;">
-                            <label for="txtHoten" class="info__data-label">Họ tên</label>
+                            <label for="txtHoten" class="info__data-label">Full name</label>
                             <div class="info__data-area">
-                                <input type="text" name="fullname" id="txtHoten" value="${ sessionScope.info.fullname}" placeholder="Nhập họ tên">
+                                <input type="text" name="fullname" id="txtHoten" value="${ sessionScope.info.fullname}" placeholder="Enter your name">
                             <p class="info__datap" id="upterror"></p>
                             <input type="hidden"  name="username" value="${ sessionScope.info.user}">
                         </div>
@@ -64,18 +67,18 @@
                         <input type="text" name="mail" readonly id="email" value="${ sessionScope.info.mail}">
                     </div>           
                     <div class="info__data">
-                        <label for="txtPhone" class="info__data-label">Số điện thoại</label>
-                        <input type="text" id="txtPhone" name="phone" value="${ sessionScope.info.phone}" placeholder="Nhập số điện thoại">
+                        <label for="txtPhone" class="info__data-label">Phone number</label>
+                        <input type="text" id="txtPhone" name="phone" value="${ sessionScope.info.phone}" placeholder="Enter your phone number">
                         <p class="info__datap" id="upterror_1"></p>
                     </div>
                     <div class="info__data">
-                        <label for="txtAddress" class="info__data-label">Địa chỉ</label>
-                        <input type="text" id="txtAddress" name="address" value="${ sessionScope.info.address}" placeholder="Nhập địa chỉ">
+                        <label for="txtAddress" class="info__data-label">Address</label>
+                        <input type="text" id="txtAddress" name="address" value="${ sessionScope.info.address}" placeholder="Enter your address">
                         <p class="info__datap" id="upaerror"></p>
                     </div>
                     <div class="info__footer">
                         <div class="info__back">
-                            <a href="home">Quay Lại</a> 
+                            <a href="home">Back</a> 
                         </div>    
                         <input type="submit" class="login__submit" value="Update" name="action">
                     </div>

@@ -44,7 +44,9 @@
         </style>
     </head>
     <body>
-
+        <c:if test="${sessionScope.isAdmin eq 1}">
+            <c:redirect url="dashboard"></c:redirect>
+        </c:if>
         <!--PreLoader-->
         <div class="loader">
             <div class="loader-inner">

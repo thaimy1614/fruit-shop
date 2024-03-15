@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -43,11 +44,14 @@
         <!--PreLoader Ends-->
 
         <!-- header -->
-        <jsp:include page="menu.jsp"></jsp:include>
+        <c:if test="${sessionScope.isAdmin ne 1}">
+            <jsp:include page="menu.jsp"></jsp:include>
+
+        </c:if>
         <!-- end header -->
 
         <!-- search area -->
-        
+
         <!-- end search arewa -->
         <!-- breadcrumb-section -->
         <div class="breadcrumb-section breadcrumb-bg">

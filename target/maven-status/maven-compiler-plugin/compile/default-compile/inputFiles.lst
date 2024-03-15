@@ -10,10 +10,12 @@ D:\2024\SWP\FruitShop\src\main\java\model\Product.java
 D:\2024\SWP\FruitShop\src\main\java\com\vnpay\common\ajaxServlet.java
 D:\2024\SWP\FruitShop\src\main\java\controller\AddCart.java
 D:\2024\SWP\FruitShop\src\main\java\dao\UserDAO.java
+D:\2024\SWP\FruitShop\src\main\java\model\Category.java
 D:\2024\SWP\FruitShop\src\main\java\config\LocalDateTimeAdapter.java
 D:\2024\SWP\FruitShop\src\main\java\com\vnpay\common\vnpayRefund.java
 D:\2024\SWP\FruitShop\src\main\java\controller\TopFruitController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\SearchController.java
+D:\2024\SWP\FruitShop\src\main\java\controller\CategoryController.java
 D:\2024\SWP\FruitShop\src\main\java\model\Email.java
 D:\2024\SWP\FruitShop\src\main\java\controller\HomeController.java
 D:\2024\SWP\FruitShop\src\main\java\model\OrderItem.java
@@ -32,6 +34,7 @@ D:\2024\SWP\FruitShop\src\main\java\controller\OrderPlaceController.java
 D:\2024\SWP\FruitShop\src\main\java\dao\OrderDAO.java
 D:\2024\SWP\FruitShop\src\main\java\com\vnpay\common\vnpayQuery.java
 D:\2024\SWP\FruitShop\src\main\java\controller\DashboardController.java
+D:\2024\SWP\FruitShop\src\main\java\dao\CategoryDAO.java
 D:\2024\SWP\FruitShop\src\main\java\controller\MenuController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\ProductController.java
 D:\2024\SWP\FruitShop\src\main\java\controller\AccountController.java
