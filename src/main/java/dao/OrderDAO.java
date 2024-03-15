@@ -14,6 +14,7 @@ import model.Order;
 import model.Order;
 import model.OrderItem;
 import model.OrderItem;
+import model.Product;
 
 /**
  *
@@ -465,5 +466,83 @@ public class OrderDAO {
             }
         }
         return rerult;
+    }
+
+    public int getTotalAmountEachMonth(int month) {
+        String query = "SELECT SUM(total_amount) \n"
+                + "FROM dbo.[Order] \n"
+                + "WHERE MONTH(order_date) = ?;";
+        try {
+            conn = new DBConnect().getConnection();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<Product> topFruits() {
+        List<Product> result = new ArrayList<>();
+        String query = "SELECT TOP 10\n"
+                + "    oi.pId,\n"
+                + "	p.img,\n"
+                + "    p.name,\n"
+                + "	p.price,\n"
+                + "	p.quantity,\n"
+                + "	p.des,\n"
+                + "    COUNT(oi.order_item_id) AS total_sold_out\n"
+                + "FROM\n"
+                + "    OrderItem oi\n"
+                + "JOIN\n"
+                + "    Product p ON oi.pId = p.pId\n"
+                + "JOIN\n"
+                + "    [Order] o ON oi.order_id = o.order_id\n"
+                + "WHERE\n"
+                + "    o.startus = 1 or o.startus = 2\n"
+                + "GROUP BY\n"
+                + "    oi.pId,\n"
+                + "    p.name,\n"
+                + "	p.img,\n"
+                + "	p.price,\n"
+                + "	p.quantity,\n"
+                + "	p.des\n"
+                + "ORDER BY\n"
+                + "    total_sold_out DESC;";
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                //int pId, String pName, float pPrice, String pimg, String pDes,int quantity, String cname, int cId, int soldout
+                result.add(new Product(
+                        rs.getInt(1), rs.getString(3), rs.getInt(4), rs.getString(2), rs.getString(6), rs.getInt(5), "", 0, rs.getInt(7)
+                ));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        return result;
     }
 }

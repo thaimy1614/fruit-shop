@@ -106,8 +106,47 @@
                 margin-bottom: 0;
             }
 
-        </style>
 
+        </style>
+        <style>body {
+                background-color: #fbfbfb;
+            }
+            @media (min-width: 991.98px) {
+                main {
+                    padding-left: 240px;
+                }
+            }
+
+            /* Sidebar */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                padding: 58px 0 0; /* Height of navbar */
+                box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+                width: 240px;
+                z-index: 600;
+            }
+
+            @media (max-width: 991.98px) {
+                .sidebar {
+                    width: 100%;
+                }
+            }
+            .sidebar .active {
+                border-radius: 5px;
+                box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+            }
+
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+                height: calc(100vh - 48px);
+                padding-top: 0.5rem;
+                overflow-x: hidden;
+                overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            }</style>
     </head>
     <body>
 
@@ -117,28 +156,33 @@
                 <div class="circle"></div>
             </div>
         </div>
-        <jsp:include page="menu.jsp"></jsp:include>
-            <div class="breadcrumb-section breadcrumb-bg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 offset-lg-2 text-center">
-                            <div class="breadcrumb-text">
-                                <p>Fruit Shop</p>
-                                <h1>Feedback</h1>
-                            </div>
+        <c:if test="${sessionScope.isAdmin ne 1}">
+            <jsp:include page="menu.jsp"></jsp:include>
+        </c:if>
+        <c:if test="${sessionScope.isAdmin eq 1}">
+            <jsp:include page="nav-admin.jsp"></jsp:include>
+        </c:if>
+        <div class="breadcrumb-section breadcrumb-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="breadcrumb-text">
+                            <p>Fruit Shop</p>
+                            <h1>Feedback</h1>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div class="container mt-5 mb-5">
-                <!-- Feedback sorting buttons -->
-                <div class="text-right mb-3">
-                    <button id="newest-btn" class="btn btn-primary">Newest</button>
-                    <button id="oldest-btn" class="btn btn-primary">Oldest</button>
-                </div>
-                <!-- Feedback form -->
+        <div class="container mt-5 mb-5">
+            <!-- Feedback sorting buttons -->
+            <div class="text-right mb-3">
+                <button id="newest-btn" class="btn btn-primary">Newest</button>
+                <button id="oldest-btn" class="btn btn-primary">Oldest</button>
+            </div>
+            <!-- Feedback form -->
             <c:if test="${sessionScope.info.isCus eq 1}">
                 <form action="feedback" method="post">
                     <div class="form-group">
@@ -237,10 +281,10 @@
                 var dateResponse = $('#date-response').text();
                 var replacedDateResponse = dateResponse.replace('T', ' ');
 
-            $('#date-message').empty();
-            $('#date-response').empty();
-            $('#date-message').append(replacedDateMessage);
-            $('#date-response').append(replacedDateResponse);
+                $('#date-message').empty();
+                $('#date-response').empty();
+                $('#date-message').append(replacedDateMessage);
+                $('#date-response').append(replacedDateResponse);
             });
 
             function loadFeedback(sortType) {

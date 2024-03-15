@@ -75,6 +75,7 @@
                                 <ul class="sub-menu">
                                     <c:if test="${sessionScope.info.isAdmin == 1}">
                                         <li><a href="manage">Fruit Management</a></li>
+                                        <li><a href="manage?check=ordermanage">Order Management</a></li>
                                         <li><a href="dashboard">Dashboard</a></li>
 
                                     </c:if>

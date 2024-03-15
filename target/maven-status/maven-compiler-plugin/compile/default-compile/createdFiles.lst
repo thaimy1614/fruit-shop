@@ -1,4 +1,3 @@
-model\ProductDAO.class
 controller\HomeController.class
 model\Cart.class
 model\Email.class
@@ -25,12 +24,9 @@ controller\ForgotPassword.class
 model\Order.class
 com\vnpay\common\vnpayQuery.class
 model\OrderItem.class
-model\CartDAO.class
-model\OrderDAO.class
 controller\RegisterAccount.class
 controller\SearchController.class
 com\vnpay\common\ajaxServlet.class
 controller\LogoutController.class
 controller\MenuController.class
 connect\DBConnect.class
-model\UserDAO.class

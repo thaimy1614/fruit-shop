@@ -18,6 +18,7 @@ public class Product {
     private int quantity;
     private String cname;
     private int cId;
+    private int soldout;
 
     public Product() {
     }
@@ -32,7 +33,27 @@ public class Product {
         this.cname = cname;
         this.cId =  cId;
     }
+    public Product(int pId, String pName, float pPrice, String pimg, String pDes,int quantity, String cname, int cId, int soldout) {
+        this.pId = pId;
+        this.pName = pName;
+        this.pPrice = pPrice;
+        this.pimg = pimg;
+        this.pDes = pDes;
+        this.quantity = quantity;
+        this.cname = cname;
+        this.cId =  cId;
+        this.soldout = soldout;
+    }
 
+    public int getSoldout() {
+        return soldout;
+    }
+
+    public void setSoldout(int soldout) {
+        this.soldout = soldout;
+    }
+
+    
     public int getQuantity() {
         return quantity;
     }

@@ -47,6 +47,14 @@ public class DashboardController extends HttpServlet {
             for (Order order : od.getAllOrder()) {
                 total+=(int)order.getAmount();
             }
+            for (int i = 1; i <= 12; i++) {
+                if(od.getTotalAmountEachMonth(i)>0){
+                    request.setAttribute("totalMoneyMonth"+i, od.getTotalAmountEachMonth(i));
+                }else{
+                    request.setAttribute("totalMoneyMonth"+i, 0);
+                }
+                
+            }
             session.setAttribute("total", total);
             session.setAttribute("numberOfOrders", numberOfOrders);
             session.setAttribute("numberOfCustomer", numberOfCustomers);
