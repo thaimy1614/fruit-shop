@@ -46,6 +46,9 @@ public class ManagementController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CategoryDAO cateDAO = new CategoryDAO();
+        List<Category> categories = cateDAO.getAllCategories();
+        request.setAttribute("categories", categories);
         String check = request.getParameter("check");
         String action = request.getParameter("action");
         String messExport = (String) request.getAttribute("messExport");
@@ -90,6 +93,7 @@ public class ManagementController extends HttpServlet {
         } else {
             response.setContentType("text/html;charset=UTF-8");
             ProductDAO dao = new ProductDAO();
+
             List<Product> product = dao.getAllProducts();
             request.setAttribute("products", product);
             request.setAttribute("messExport", messExport);
@@ -125,6 +129,9 @@ public class ManagementController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CategoryDAO cateDAO = new CategoryDAO();
+        List<Category> categories = cateDAO.getAllCategories();
+        request.setAttribute("categories", categories);
         if (request.getParameter("export") != null) {
             Workbook workbook = new Workbook();
             Worksheet sheet = workbook.getWorksheets().get(0);

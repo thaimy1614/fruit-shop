@@ -92,16 +92,15 @@
                             <div class="product-filters">
                                 <ul>
                                     <li class="active" data-filter="*">All</li>
-                                    <li>Strawberry</li>
-                                    <li>Berry</li>
-                                    <li>Lemon</li>
-                                    <li>Other</li>
-                                </ul>
-                            </div>
+                                    <c:forEach var="cate" items="${categories}">
+                                    <li>${cate.cName}</li>
+                                    </c:forEach>
+                            </ul>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row product-lists">
+                <div class="row product-lists">
                     <c:forEach var="p" items="${products}">
                         <div class="col-lg-4 col-md-6 text-center ${fn:toLowerCase(p.cname)}">
                             <div class="single-product-item">
@@ -315,7 +314,7 @@
                 function loadProducts() {
                     var filter = $('.product-filters li.active').html().toString().toLowerCase();
                     if (filter === 'other') {
-                        filter = 'orther';
+                        filter = 'other';
                     }
                     $.ajax({
                         type: "POST",

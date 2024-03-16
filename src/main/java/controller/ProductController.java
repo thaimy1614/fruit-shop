@@ -6,6 +6,7 @@ package controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import dao.CategoryDAO;
 import model.Product;
 import dao.ProductDAO;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import model.Category;
 
 /**
  *
@@ -66,7 +68,9 @@ public class ProductController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         List<Product> allProducts = dao.getAllProducts();
         String filter = request.getParameter("filter");
-
+        CategoryDAO cateDAO = new CategoryDAO();
+        List<Category> categories = cateDAO.getAllCategories();
+        request.setAttribute("categories", categories);
         int pageNumber = 1;
         String pageParam = request.getParameter("page");
         if (pageParam != null && !pageParam.isEmpty()) {

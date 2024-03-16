@@ -220,10 +220,9 @@
                         <div class="mb-3 col-6">
                             <label for="selectCate" class="form-label">Category:</label>
                             <select class="form-select form-control" name="loai" id="selectCate">
-                                <option value="1">Strawberry</option>
-                                <option value="2">Berry</option>
-                                <option value="3">Lemon</option>
-                                <option value="4">Orther</option>
+                                <c:forEach var="cate" items="${categories}" varStatus="loop">
+                                    <option value="${loop.index+1}">${cate.cName}</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -290,10 +289,9 @@
                     <div class="mb-5">
                         <select class="form-select form-control" name="loai">
                             <option value="4" disabled selected>Category</option>
-                            <option value="1">Strawberry</option>
-                            <option value="2">Berry</option>
-                            <option value="3">Lemon</option>
-                            <option value="4">Other</option>
+                            <c:forEach var="cate" items="${categories}" varStatus="loop">
+                                <option value="${loop.index+1}">${cate.cName}</option>
+                            </c:forEach> 
                         </select>
                     </div>
                     <button type="submit" class="btn btn-success" name="btnInsert"

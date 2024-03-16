@@ -27,7 +27,7 @@ public class CategoryDAO {
 
     public List<Category> getAllCategories() {
         List<Category> result = new ArrayList<>();
-        String query = "SELECT * FROM Catelogy";
+        String query = "SELECT * FROM Category";
 
         try {
             conn = DBConnect.getConnection();
@@ -60,7 +60,7 @@ public class CategoryDAO {
 
     public List<Category> searchCategory(String key) {
         List<Category> result = new ArrayList<>();
-        String query = "SELECT * FROM Catelogy WHERE cName like ?";
+        String query = "SELECT * FROM Category WHERE cName like ?";
 
         try {
             conn = DBConnect.getConnection();
@@ -94,7 +94,7 @@ public class CategoryDAO {
 
     public boolean deleteCategory(int Id) {
         boolean rerult = false;
-        String query = "Delete Catelogy\n"
+        String query = "Delete Category\n"
                 + "where cId = ?;";
         String query1 = "Delete Product\n"
                 + "where cId = ?;";
@@ -136,7 +136,7 @@ public class CategoryDAO {
 
     public boolean createCategory(int id, String name) {
         boolean rerult = false;
-        String query = "insert into Catelogy(cId, cName) values (?, ?)";
+        String query = "insert into Category(cId, cName) values (?, ?)";
 
         try {
             conn = DBConnect.getConnection();
@@ -172,7 +172,7 @@ public class CategoryDAO {
 
     public boolean updateCategory(int Id, String name) {
         boolean rerult = false;
-        String query = "UPDATE [dbo].[Catelogy]\n"
+        String query = "UPDATE [dbo].[Category]\n"
                 + "                SET [cName] = ?\n"
                 + "                WHERE [cId] = ?";
 
@@ -209,7 +209,7 @@ public class CategoryDAO {
 
     public int selectMaxId() {
         int result = 0;
-        String query = "Select max(cId) from Catelogy";
+        String query = "Select max(cId) from Category";
 
         try {
             conn = DBConnect.getConnection();

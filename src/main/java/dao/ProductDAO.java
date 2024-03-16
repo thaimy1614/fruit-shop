@@ -28,7 +28,7 @@ public class ProductDAO {
         List<Product> result = new ArrayList<>();
         String query = "SELECT P.[pId], P.[name], P.[price], P.[img], P.[des], P.[quantity], C.[cName], P.cId\n"
                 + "                FROM [dbo].[Product] AS P\n"
-                + "               INNER JOIN Catelogy AS C ON P.[cId] = C.[cId]\n"
+                + "               INNER JOIN Category AS C ON P.[cId] = C.[cId]\n"
                 + "                where [status] = 1"
                 + "                 order by pId desc";
 
@@ -72,7 +72,7 @@ public class ProductDAO {
         List<Product> result = new ArrayList<>();
         String query = "SELECT P.[pId], P.[name], P.[price], P.[img], P.[des], P.[quantity], C.[cName], P.cId\n"
                 + "                FROM [dbo].[Product] AS P\n"
-                + "               INNER JOIN Catelogy AS C ON P.[cId] = C.[cId]\n"
+                + "               INNER JOIN Category AS C ON P.[cId] = C.[cId]\n"
                 + "                where [status] = 1 and P.[name] like ?"
                 + "                 order by pId desc";
 
@@ -117,7 +117,7 @@ public class ProductDAO {
         List<Product> result = new ArrayList<>();
         String query = "SELECT TOP 3 P.[pId], P.[name], P.[price], P.[img],P.[des],P.[quantity], C.[cName], P.cId\n"
                 + "  FROM [dbo].[Product] AS P\n"
-                + " INNER JOIN Catelogy AS C ON P.[cId] = C.[cId]\n"
+                + " INNER JOIN Category AS C ON P.[cId] = C.[cId]\n"
                 + "where [status] = 1\n"
                 + "  ORDER BY pId DESC";
 
@@ -293,7 +293,7 @@ public class ProductDAO {
         List<Product> result = new ArrayList<>();
         String sql = "SELECT P.[pId], P.[name], P.[price], P.[img], P.[des], P.[quantity], C.[cName], P.cId\n"
                 + "                FROM [dbo].[Product] AS P\n"
-                + "               INNER JOIN Catelogy AS C ON P.[cId] = C.[cId]\n"
+                + "               INNER JOIN Category AS C ON P.[cId] = C.[cId]\n"
                 + "                where [status] = 1"
                 + "                 order by pId desc "
                 + "OFFSET ? ROWS\n"

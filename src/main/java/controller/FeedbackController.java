@@ -28,8 +28,9 @@ public class FeedbackController extends HttpServlet {
         FeedbackDAO feedbackDAO = new FeedbackDAO();
         List<Message> feedbackList = null;
         HttpSession session = request.getSession();
+        boolean isAdmin = false;
         if (session.getAttribute("isAdmin") != null) {
-            boolean isAdmin = ((int) session.getAttribute("isAdmin") == 1) ? true : false;
+            isAdmin = ((int) session.getAttribute("isAdmin") == 1) ? true : false;
         }
         // Get feedback list based on sorting type
         if (sortType == null) {
