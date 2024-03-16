@@ -44,6 +44,7 @@ public class LogoutController extends HttpServlet {
         session.removeAttribute("user");
         session.removeAttribute("info");
         session.removeAttribute("username");
+        session.removeAttribute("isAdmin");
         response.sendRedirect("home");
     }
 

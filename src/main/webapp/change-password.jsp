@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <!-- responsive -->
     <link rel="stylesheet" href="assets/css/responsive.css">
-    <<link rel="stylesheet" href="css/style-welcome.css"/>
+    <link rel="stylesheet" href="css/style-welcome.css"/>
     <style>
         .top-header-area {
             background-color: #051922;
@@ -45,19 +45,64 @@
     </style>
 </head>
 <body>
-    <c:if test="${sessionScope.isAdmin eq 1}">
-        <c:redirect url="dashboard"></c:redirect>
-    </c:if>
     <c:if test="${sessionScope.info == null}">
         <jsp:forward page="home"></jsp:forward>
     </c:if>
-    <jsp:include page="menu.jsp"></jsp:include>
-        <div class="container mt-150 mb-150">
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-4">
-                    <h3 class="text-center">Change Password</h3>
-                    <form id="changepass" action="change-password" method="POST">
-                        <span class="text-success text-center text-decoration-none">${messSuc}</span>
+    <c:if test="${sessionScope.isAdmin ne 1}">
+        <jsp:include page="menu.jsp"></jsp:include>
+
+    </c:if>
+    <c:if test="${sessionScope.isAdmin eq 1}">
+        <jsp:include page="nav-admin.jsp"></jsp:include>
+            <style>
+                body {
+                    background-color: #fbfbfb;
+                }
+                @media (min-width: 991.98px) {
+                    main {
+                        padding-left: 240px;
+                    }
+                }
+
+                /* Sidebar */
+                .sidebar {
+                    position: fixed;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    padding: 58px 0 0; /* Height of navbar */
+                    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+                    width: 240px;
+                    z-index: 600;
+                }
+
+                @media (max-width: 991.98px) {
+                    .sidebar {
+                        width: 100%;
+                    }
+                }
+                .sidebar .active {
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+                }
+
+                .sidebar-sticky {
+                    position: relative;
+                    top: 0;
+                    height: calc(100vh - 48px);
+                    padding-top: 0.5rem;
+                    overflow-x: hidden;
+                    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+                }
+            </style>
+    </c:if>
+
+    <div class="container mt-150 mb-150">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-4">
+                <h3 class="text-center">Change Password</h3>
+                <form id="changepass" action="change-password" method="POST">
+                    <span class="text-success text-center text-decoration-none">${messSuc}</span>
                     <span class="text-danger text-center text-decoration-none">${messFail}</span>
                     <div class="mb-3">
                         <label for="password" class="form-label">Current Password</label>
