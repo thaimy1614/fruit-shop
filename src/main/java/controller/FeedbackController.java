@@ -28,7 +28,9 @@ public class FeedbackController extends HttpServlet {
         FeedbackDAO feedbackDAO = new FeedbackDAO();
         List<Message> feedbackList = null;
         HttpSession session = request.getSession();
-        boolean isAdmin = ((int)session.getAttribute("isAdmin") == 1) ? true : false;
+        if (session.getAttribute("isAdmin") != null) {
+            boolean isAdmin = ((int) session.getAttribute("isAdmin") == 1) ? true : false;
+        }
         // Get feedback list based on sorting type
         if (sortType == null) {
             feedbackList = feedbackDAO.getAllMessagesSortedByNewest();
@@ -42,8 +44,8 @@ public class FeedbackController extends HttpServlet {
             }
             // Convert feedback list and isAdmin flag to JSON
             Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-                .create();
+                    .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                    .create();
             JsonObject jsonResponse = new JsonObject();
             jsonResponse.addProperty("isAdmin", isAdmin);
             jsonResponse.add("feedbackList", gson.toJsonTree(feedbackList));
