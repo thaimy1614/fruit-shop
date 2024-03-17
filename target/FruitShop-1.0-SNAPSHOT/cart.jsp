@@ -210,9 +210,9 @@
                         <div class="footer-box get-in-touch">
                             <h2 class="widget-title">Get in Touch</h2>
                             <ul>
-                                <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                                <li>support@fruitkha.com</li>
-                                <li>+00 111 222 3333</li>
+                                <li>Can Tho</li>
+                                <li>group01se1709@gmail.com</li>
+                                <li>+84 12 345 678</li>
                             </ul>
                         </div>
                     </div>

@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
 import dao.OrderDAO;
@@ -11,47 +12,43 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Product;
-import dao.ProductDAO;
 import model.Order;
 
 /**
  *
- * @author ththu
+ * @author Duong Quoc Thai CE171563
  */
-public class SearchController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class TransactionController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchController</title>");
+            out.println("<title>Servlet TransactionController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet TransactionController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -59,17 +56,21 @@ public class SearchController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ProductDAO dao = new ProductDAO();
-        String search = request.getParameter("txtSearch");
-        List<Product> product = dao.searchProducts(search);
-        request.setAttribute("products", product);
-        request.getRequestDispatcher("shop.jsp").forward(request, response);
-    }
+    throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("isAdmin")==null){
+            response.sendRedirect("home");
+        }else{
+            OrderDAO od = new OrderDAO();
+            List<Order> orders = od.getAllOrder();
+            request.setAttribute("orders", orders);
+//            request.setAttribute("transactionCOD", orders);
+            request.getRequestDispatcher("transaction.jsp").forward(request, response);
+       }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -77,27 +78,12 @@ public class SearchController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String searchOrder = request.getParameter("searchOrder");
-        if (searchOrder != null && !searchOrder.equals("")) {
-            OrderDAO orderDAO = new OrderDAO();
-            List<Order> orders = orderDAO.searchOrders(searchOrder);
-            request.setAttribute("searchOrder", searchOrder);
-            request.setAttribute("ord", orders);
-            request.getRequestDispatcher("manage-order.jsp").forward(request, response);
-        } else {
-            ProductDAO dao = new ProductDAO();
-            String search = request.getParameter("search");
-            List<Product> product = dao.searchProducts(search);
-            request.setAttribute("products", product);
-            request.setAttribute("lastS", search);
-            request.getRequestDispatcher("Manager.jsp").forward(request, response);
-        }
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

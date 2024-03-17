@@ -81,7 +81,7 @@
                                     <span class="author"><i class="fas fa-user"></i> Admin</span>
                                     <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
                                 </p>
-                                <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus laborum autem, dolores inventore, beatae nam.</p>
+                                <p class="excerpt">Healthy</p>
                                 <a href="single-news.jsp" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                     <span class="author"><i class="fas fa-user"></i> Admin</span>
                                     <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
                                 </p>
-                                <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus laborum autem, dolores inventore, beatae nam.</p>
+                                <p class="excerpt">Vitamin+</p>
                                 <a href="single-news.jsp" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                                     <span class="author"><i class="fas fa-user"></i> Admin</span>
                                     <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
                                 </p>
-                                <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus laborum autem, dolores inventore, beatae nam.</p>
+                                <p class="excerpt">Cheap</p>
                                 <a href="single-news.jsp" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                                     <span class="author"><i class="fas fa-user"></i> Admin</span>
                                     <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
                                 </p>
-                                <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus laborum autem, dolores inventore, beatae nam.</p>
+                                <p class="excerpt">Juicy</p>
                                 <a href="single-news.jsp" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                                     <span class="author"><i class="fas fa-user"></i> Admin</span>
                                     <span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
                                 </p>
-                                <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus laborum autem, dolores inventore, beatae nam.</p>
+                                <p class="excerpt">Delicious</p>
                                 <a href="single-news.jsp" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
@@ -151,30 +151,14 @@
                                     <span class="author"><i class="fas fa-user"></i> Admin</span>
                                     <span class="date"><i class="fas fa-calendar"></i> 27 December, 2018</span>
                                 </p>
-                                <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus laborum autem, dolores inventore, beatae nam.</p>
+                                <p class="excerpt">Fresh</p>
                                 <a href="single-news.jsp" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <div class="pagination-wrap">
-                                    <ul>
-                                        <li><a href="#">Prev</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a class="active" href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
         <!-- end latest news -->
@@ -214,16 +198,16 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-box about-widget">
                             <h2 class="widget-title">About us</h2>
-                            <p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+                            <p>Fruit Shop</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-box get-in-touch">
                             <h2 class="widget-title">Get in Touch</h2>
                             <ul>
-                                <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-                                <li>support@fruitkha.com</li>
-                                <li>+00 111 222 3333</li>
+                                <li>Can Tho</li>
+                                <li>group01se1709@gmail.com</li>
+                                <li>+84 12 345 678</li>
                             </ul>
                         </div>
                     </div>
@@ -231,11 +215,11 @@
                         <div class="footer-box pages">
                             <h2 class="widget-title">Pages</h2>
                             <ul>
-                                <li><a href="index.jsp">Home</a></li>
+                                <li><a href="home">Home</a></li>
                                 <li><a href="about.jsp">About</a></li>
-                                <li><a href="services.jsp">Shop</a></li>
+                                <li><a href="shop">Shop</a></li>
                                 <li><a href="news.jsp">News</a></li>
-                                <li><a href="contact.jsp">Contact</a></li>
+                                <li><a href="feedback">Contact</a></li>
                             </ul>
                         </div>
                     </div>

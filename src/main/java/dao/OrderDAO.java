@@ -545,4 +545,62 @@ public class OrderDAO {
 
         return result;
     }
+
+    public List<Order> searchOrders(String key) {
+        List<Order> result = new ArrayList<>();
+        String query = "SELECT [username]\n"
+                + "      ,[order_id]\n"
+                + "	  ,[name]\n"
+                + "	  ,[address]\n"
+                + "	  ,[phone]\n"
+                + "	  ,[total_quantity]\n"
+                + "	  ,[total_amount]\n"
+                + "      ,[order_date]\n"
+                + "      ,[startus]\n"
+                + "      ,[note]\n"
+                + "      ,[pay]\n"
+                + "  FROM [Order]\n"
+                + "  Where username LIKE ?\n"
+                + "order by order_id desc";
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + key + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(new Order(
+                        rs.getString(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getFloat(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getString(10),
+                        rs.getInt(11)));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        return result;
+    }
 }

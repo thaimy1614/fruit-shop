@@ -105,7 +105,12 @@
                         <input type="hidden" name="export" value="orders" />
                         <button class="btn btn-dark">Export to Excel</button>
                     </form>
-
+                    <form action="search" method="POST" class="row justify-content-center col-6">
+                    <input type="text" class="form-control col-5" id="search" name="searchOrder" value="${searchOrder}"required>
+                    <button type="submit" class="btn btn-dark" style="margin: 0 16px;">
+                        Search
+                    </button>
+                </form>
                 </div>
 
 

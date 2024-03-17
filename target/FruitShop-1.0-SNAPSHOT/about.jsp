@@ -233,7 +233,7 @@
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">About us</h2>
-						<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+						<p>Fruit Shop</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
@@ -241,8 +241,8 @@
 						<h2 class="widget-title">Get in Touch</h2>
 						<ul>
 							<li></li>
-							<li>support@fruitkha.com</li>
-							<li>+00 111 222 3333</li>
+							<li>group01se1709@gmail.com</li>
+							<li>+84 12 345 678</li>
 						</ul>
 					</div>
 				</div>
